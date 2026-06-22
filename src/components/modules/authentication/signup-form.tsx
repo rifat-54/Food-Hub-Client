@@ -15,16 +15,22 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { toast } from "sonner";
 import * as z from "zod";
+
+
 
 const formSchema = z
   .object({
     name: z.string().min(1, "This field is required"),
     email: z.email(),
     password: z.string().min(8, "Minium length is 8"),
-    confirmPassword: z.string(),
+    confirmPassword: z.string().min(1)
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password doesn't match",
@@ -32,6 +38,9 @@ const formSchema = z
   });
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router=useRouter()
+
+
   const form = useForm({
     defaultValues: {
       name: "",
@@ -40,10 +49,30 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       confirmPassword: "",
     },
     validators: {
+      // onBlur:formSchema,
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("on submit called", value);
+      const toastId = toast.loading("Creating User...");
+      // console.log("on submit called", value);
+
+      const { confirmPassword, ...userData } = value;
+
+      try {
+        const { data, error } = await authClient.signUp.email(userData);
+        // console.log(data, error);
+
+        if (error) {
+          toast.error(error?.message, { id: toastId });
+          return;
+        }
+
+        toast.success("Account created successfully", { id: toastId });
+        form.reset()
+        router.push("/")
+      } catch (error) {
+        toast.error("Something went wrong. Try Again", { id: toastId });
+      }
     },
   });
 
@@ -170,7 +199,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
             <FieldGroup>
               <Field>
-                <Button type="submit">Create Account</Button>
+                <Button type="submit" disabled={form.state.isSubmitting}>{form.state.isSubmitting?"Creating...":"Create Account"}</Button>
                 <Button variant="outline" type="button">
                   Sign up with Google
                 </Button>
