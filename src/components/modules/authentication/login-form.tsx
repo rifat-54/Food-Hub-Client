@@ -15,6 +15,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
@@ -27,6 +28,13 @@ const formSchema = z.object({
   email: z.email(),
   password: z.string().min(8, "Minium length is 8"),
 });
+
+const handleGoogleLogin=async()=>{
+  const data=await authClient.signIn.social({
+    provider:"google",
+    callbackURL:env.NEXT_PUBLIC_FRONTEND_URL
+  })
+}
 
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
@@ -135,7 +143,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
                 <Button type="submit" disabled={form.state.isSubmitting}>
                   {form.state.isSubmitting ? "Login..." : "Login"}
                 </Button>
-                <Button variant="outline" type="button">
+                <Button onClick={()=>handleGoogleLogin()} variant="outline" type="button">
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">

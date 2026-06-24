@@ -15,6 +15,7 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
@@ -36,6 +37,15 @@ const formSchema = z
     message: "Password doesn't match",
     path: ["confirmPassword"],
   });
+
+  const handleGoogleLogin=async()=>{
+    const data=await authClient.signIn.social({
+      provider:"google",
+      callbackURL:env.NEXT_PUBLIC_FRONTEND_URL
+    })
+  }
+
+
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router=useRouter()
@@ -200,7 +210,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             <FieldGroup>
               <Field>
                 <Button type="submit" disabled={form.state.isSubmitting}>{form.state.isSubmitting?"Creating...":"Create Account"}</Button>
-                <Button variant="outline" type="button">
+                <Button onClick={()=>handleGoogleLogin()} variant="outline" type="button">
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">
