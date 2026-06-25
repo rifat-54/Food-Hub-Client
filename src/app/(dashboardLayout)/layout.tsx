@@ -26,7 +26,7 @@ export default function DashboardLayout({
   provider: React.ReactNode;
 }) {
 
-    const role="admin"
+    const role="ADMIN"
 
 
   return (
