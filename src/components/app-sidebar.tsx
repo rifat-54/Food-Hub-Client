@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from "react";
 
-import { SearchForm } from "@/components/search-form"
-import { VersionSwitcher } from "@/components/version-switcher"
+import { SearchForm } from "@/components/search-form";
+import { VersionSwitcher } from "@/components/version-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -13,9 +13,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import Link from "next/link"
-import { Route } from "@/types/route.types"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import { Route } from "@/types/route.types";
+import { adminRoute } from "@/routes/adminRoutes";
+import { Role } from "@/constant/role";
+import { providerRoute } from "@/routes/providerRoutes";
+import { userRoute } from "@/routes/userRoutes";
 
 // This is sample data.
 const data = {
@@ -52,18 +56,35 @@ const data = {
           title: "Rendering",
           url: "#",
         },
-   
-      
       ],
     },
-   
   ],
-}
+};
 
-export function AppSidebar({ user,...props }:{user:{role:String}} & React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  user,
+  ...props
+}: { user: { role: string } } & React.ComponentProps<typeof Sidebar>) {
 
-  let routes:Route[]=[]
+  let routes: Route[] = [];
 
+  switch (user?.role) {
+
+    case Role.ADMIN:
+      routes = adminRoute;
+      break
+    case Role.PROVIDER:
+      routes=providerRoute
+      break
+    case Role.USER:
+      routes=userRoute
+      break
+    default:
+      routes=[]
+      break
+
+
+  }
 
   return (
     <Sidebar {...props}>
@@ -76,14 +97,14 @@ export function AppSidebar({ user,...props }:{user:{role:String}} & React.Compon
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
+        { routes?.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
+                {item.items?.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
+                    <SidebarMenuButton asChild >
                       <Link href={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -95,5 +116,5 @@ export function AppSidebar({ user,...props }:{user:{role:String}} & React.Compon
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

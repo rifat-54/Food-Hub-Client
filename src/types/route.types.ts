@@ -1,7 +1,6 @@
 export interface Route {
   title?: string;
-  item: {
-    title: string;
-    url: string;
-  }[];
+  items: {
+    title: string,
+    url: string}[];
 }
