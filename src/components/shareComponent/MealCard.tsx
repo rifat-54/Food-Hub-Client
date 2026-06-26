@@ -6,6 +6,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 interface MealCardProps {
   meal: any;
@@ -61,7 +62,9 @@ export function MealCard({ meal }: MealCardProps) {
 
       <CardFooter className="flex gap-3">
         <Button className="flex-1">
+          <Link href={`meals/${meal?.id}`}>
           View Details
+          </Link>
         </Button>
 
         <Button
