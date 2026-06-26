@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import {
   Badge,
@@ -16,12 +17,30 @@ import {
   Star,
   ShoppingCart,
 } from "lucide-react";
+import { useCartStore } from "@/store/cart-store";
+import { toast } from "sonner";
 
 interface MealDetailsProps {
   meal: any;
 }
 
 export function MealDetails({ meal }: MealDetailsProps) {
+    
+    const addToCart=useCartStore((state)=>state.addToCart)
+
+    const data={
+      mealId: meal.id,
+      name: meal.name,
+      price: meal.price,
+      image: meal.image,
+      quantity: 1,
+    }
+
+    const handleSubmit=()=>{
+        addToCart(data)
+        toast.success("Added to Cart")
+    }
+    
   return (
     <section className="container mx-auto py-12">
       <div className="grid gap-12 lg:grid-cols-2">
@@ -110,6 +129,7 @@ export function MealDetails({ meal }: MealDetailsProps) {
           </Card>
 
           <Button
+          onClick={handleSubmit}
             size="lg"
             className="mt-8 h-14 text-lg"
           >
