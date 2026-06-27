@@ -1,12 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface CartItemType {
   mealId: string;
   name: string;
   price: number;
   image: string;
- quantity: number;
+  quantity: number;
 }
 
 interface OrderSummaryProps {
@@ -16,7 +17,7 @@ interface OrderSummaryProps {
 export default function OrderSummary({ items }: OrderSummaryProps) {
   const subtotal = items.reduce(
     (total, item) => total + item.price * item.quantity,
-    0
+    0,
   );
 
   const deliveryFee = 60;
@@ -50,9 +51,9 @@ export default function OrderSummary({ items }: OrderSummaryProps) {
           <span>৳{total}</span>
         </div>
 
-        <Button className="h-12 w-full">
-          Proceed to Checkout
-        </Button>
+        <Link href={"/dashboard/checkout"}>
+          <Button className="h-12 w-full">Proceed to Checkout</Button>
+        </Link>
       </CardContent>
     </Card>
   );

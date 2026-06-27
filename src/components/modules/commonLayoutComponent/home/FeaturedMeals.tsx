@@ -33,7 +33,7 @@ export function FeaturedMeals({ meals }: FeaturedMealsProps) {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {meals.slice(0, 4).map((meal) => (
+          {meals?.slice(0, 4).map((meal) => (
             <MealCard key={meal.id} meal={meal} />
           ))}
         </div>
