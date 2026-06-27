@@ -1,10 +1,10 @@
 
-import { Categories } from "@/components/modules/home/Category";
-import { FeaturedMeals } from "@/components/modules/home/FeaturedMeals";
-import { Hero } from "@/components/modules/home/Hero";
-import { PopularRestaurants } from "@/components/modules/home/PopularRestaurants";
-import { Reviews } from "@/components/modules/home/reviews";
-import { WhyFoodHub } from "@/components/modules/home/WhyFoodHub";
+import { Categories } from "@/components/modules/commonLayoutComponent/home/Category";
+import { FeaturedMeals } from "@/components/modules/commonLayoutComponent/home/FeaturedMeals";
+import { Hero } from "@/components/modules/commonLayoutComponent/home/Hero";
+import { PopularRestaurants } from "@/components/modules/commonLayoutComponent/home/PopularRestaurants";
+import { Reviews } from "@/components/modules/commonLayoutComponent/home/reviews";
+import { WhyFoodHub } from "@/components/modules/commonLayoutComponent/home/WhyFoodHub";
 import { Button } from "@/components/ui/button";
 import { mealServices } from "@/services/meals.service";
 

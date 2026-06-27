@@ -1,6 +1,6 @@
 "use client";
 
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Book, Menu, ShoppingCart, Sunset, Trees, Zap } from "lucide-react";
 
 import {
   Accordion,
@@ -27,6 +27,7 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ModeToggle } from "./ui/ModeToggle";
+import { useCartStore } from "@/store/cart-store";
 
 interface MenuItem {
   title: string;
@@ -79,7 +80,6 @@ const Navbar1 = ({
       title: "Pricing",
       url: "#",
     },
-    
   ],
   auth = {
     login: { title: "Login", url: "/login" },
@@ -87,6 +87,10 @@ const Navbar1 = ({
   },
   className,
 }: Navbar1Props) => {
+  const cart = useCartStore((state) => state.cart);
+
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <section className={cn("py-4", className)}>
       <div className="container">
@@ -112,7 +116,21 @@ const Navbar1 = ({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
+            {/* showing cart item */}
+            <Link
+              href="/cart"
+              className="relative flex h-8 w-8 items-center justify-center rounded-md border hover:bg-accent transition-colors"
+            >
+              <ShoppingCart className="h-5 w-5" />
+
+              {cartCount > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+
             <ModeToggle></ModeToggle>
             <Button asChild variant="outline" size="sm">
               <Link href={auth.login.url}>{auth.login.title}</Link>
@@ -182,13 +200,11 @@ const Navbar1 = ({
 const renderMenuItem = (item: MenuItem) => {
   return (
     <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink asChild
-      
+      <NavigationMenuLink
+        asChild
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
-        <Link   href={item.url}>
-        {item.title}
-        </Link>
+        <Link href={item.url}>{item.title}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );

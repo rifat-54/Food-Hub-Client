@@ -25,7 +25,6 @@ export const useCartStore=create<CartStore>()(
     persist(
         (set)=>({
             cart:[],
-
             addToCart:(meal)=>{
                 set((state)=>{
                     const existingMeal=state.cart.find((item)=>item.mealId===meal.mealId)

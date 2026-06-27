@@ -1,4 +1,4 @@
-import { Meals } from "@/components/modules/meals/Meals";
+import { Meals } from "@/components/modules/commonLayoutComponent/meals/Meals";
 import { mealServices } from "@/services/meals.service";
 
 

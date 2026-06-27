@@ -1,4 +1,4 @@
-import { SignupForm } from "@/components/modules/authentication/signup-form";
+import { SignupForm } from "@/components/modules/commonLayoutComponent/authentication/signup-form";
 
 
 export default function Page() {

@@ -1,4 +1,4 @@
-import { MealDetails } from '@/components/modules/meals/MealsDetails';
+import { MealDetails } from '@/components/modules/commonLayoutComponent/meals/MealsDetails';
 import { mealServices } from '@/services/meals.service';
 import React from 'react'
 
