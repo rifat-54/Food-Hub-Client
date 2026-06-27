@@ -65,7 +65,7 @@ export default function OrderSummary() {
           </p>
         </div>
 
-        <Button className="w-full h-11">
+        <Button type="submit" className="w-full h-11">
           Confirm Order
         </Button>
       </CardContent>

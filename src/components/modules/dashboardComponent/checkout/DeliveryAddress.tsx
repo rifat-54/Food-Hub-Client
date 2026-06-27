@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 
-export default function DeliveryAddress() {
+export default function DeliveryAddress({form}:{form:any}) {
   return (
     <Card>
       <CardHeader>
@@ -18,30 +18,31 @@ export default function DeliveryAddress() {
         <div className="grid gap-5 md:grid-cols-2">
           <div className="space-y-2">
             <Label>Full Name</Label>
-            <Input placeholder="John Doe" />
+            <Input required {...form.register("fullName")} placeholder="John Doe" />
           </div>
 
           <div className="space-y-2">
             <Label>Phone Number</Label>
-            <Input placeholder="+8801XXXXXXXXX" />
+            <Input required  {...form.register("phone")} placeholder="+8801XXXXXXXXX" />
           </div>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
           <div className="space-y-2">
             <Label>City</Label>
-            <Input placeholder="Dhaka" />
+            <Input required  {...form.register("city")} placeholder="Dhaka" />
           </div>
 
           <div className="space-y-2">
             <Label>Area</Label>
-            <Input placeholder="Mirpur" />
+            <Input required  {...form.register("area")} placeholder="Mirpur" />
           </div>
         </div>
 
         <div className="space-y-2">
           <Label>Street Address</Label>
           <Textarea
+          {...form.register("streetAddress")}
             rows={4}
             placeholder="House, Road, Block..."
           />
@@ -60,9 +61,6 @@ export default function DeliveryAddress() {
           />
         </div>
 
-        <Button className="w-full h-11">
-          Place Order
-        </Button>
       </CardContent>
     </Card>
   );
