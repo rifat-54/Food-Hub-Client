@@ -5,6 +5,8 @@ import OrderSummary from "./OrderSummary";
 import { useCartStore } from "@/store/cart-store";
 import { env } from "@/env";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
 
 interface meal{
     mealId:string,
@@ -12,6 +14,8 @@ interface meal{
 }
 
 export default function CheckoutForm() {
+    const router=useRouter()
+
 
     const form=useForm()
 
@@ -50,6 +54,7 @@ export default function CheckoutForm() {
 
             form.reset()
             clearCart()
+            router.push("/dashboard/myorders")
         }
 
         console.log(resData)

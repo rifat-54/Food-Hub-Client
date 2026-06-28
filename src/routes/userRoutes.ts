@@ -4,17 +4,18 @@ export const userRoute=[
         title:"User Routes",
         items:[
             {
-                title:"Cart",
-                url:"/dashboard/cart"
+                title:"View Cart",
+                url:"/cart"
             },
             {
-                title:"Orders",
-                url:"/dashboard"
+                title:"Checkout",
+                url:"/dashboard/checkout"
             },
             {
-                title:"checkout",
-                url:"/dashboard"
+                title:"My Orders",
+                url:"/dashboard/myorders"
             },
+            
         ]
     }
 ]
