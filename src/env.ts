@@ -7,10 +7,12 @@ export const env=createEnv({
         BACKEND_URL:z.url(),
         BETTER_AUTH_URL:z.url(),
         API_URL:z.url()
+        
     },
     client:{
         NEXT_PUBLIC_API_URL:z.url(),
-        NEXT_PUBLIC_FRONTEND_URL:z.url()
+        NEXT_PUBLIC_FRONTEND_URL:z.url(),
+        NEXT_PUBLIC_BETTER_AUTH_URL:z.url()
     },
     runtimeEnv:{
         BACKEND_URL:process.env.BACKEND_URL,
@@ -18,6 +20,7 @@ export const env=createEnv({
         NEXT_PUBLIC_API_URL:process.env.NEXT_PUBLIC_API_URL,
         BETTER_AUTH_URL:process.env.BETTER_AUTH_URL,
         NEXT_PUBLIC_FRONTEND_URL:process.env.NEXT_PUBLIC_FRONTEND_URL,
-        API_URL:process.env.API_URL
+        API_URL:process.env.API_URL,
+        NEXT_PUBLIC_BETTER_AUTH_URL:process.env.NEXT_PUBLIC_BETTER_AUTH_URL
     }
 })

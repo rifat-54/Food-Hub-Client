@@ -28,6 +28,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ModeToggle } from "./ui/ModeToggle";
 import { useCartStore } from "@/store/cart-store";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 interface MenuItem {
   title: string;
@@ -89,7 +91,19 @@ const Navbar1 = ({
 }: Navbar1Props) => {
   const cart = useCartStore((state) => state.cart);
 
+  const { data } = authClient.useSession();
+  console.log(data);
+
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  const handleLogout=async()=>{
+    const {data}=await authClient.signOut()
+    console.log("logout-> ",data)
+
+    if(data?.success){
+      toast.success("Successfully Logout!")
+    }
+  }
 
   return (
     <section className={cn("py-4", className)}>
@@ -132,12 +146,21 @@ const Navbar1 = ({
             </Link>
 
             <ModeToggle></ModeToggle>
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+
+            {data?.session ? (
+              <Button onClick={handleLogout} variant="outline" size="sm">
+                Logout
+              </Button>
+            ) : (
+              <div  className="flex gap-2 items-center">
+                <Button asChild variant="outline" size="sm">
+                  <Link href={auth.login.url}>{auth.login.title}</Link>
+                </Button>
+                <Button asChild size="sm">
+                  <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                </Button>
+              </div>
+            )}
           </div>
         </nav>
 
