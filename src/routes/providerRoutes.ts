@@ -7,9 +7,13 @@ export const providerRoute=[
                 url:"/provider-dashboard" 
             },
             {
-                title:"Menu",
-                url:"/provider-menu"
+                title:"Meals",
+                url:"/provider-dashboard/meals"
             },
+            {
+                title:"Orders",
+                url:"/provider-dashboard/orders"
+            }
         ]
 
     }

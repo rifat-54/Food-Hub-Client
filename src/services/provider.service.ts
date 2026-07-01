@@ -1,4 +1,6 @@
 import { env } from "@/env";
+import { userService } from "./user.service";
+import { cookies } from "next/headers";
 
 const url = env.API_URL;
 
@@ -30,4 +32,29 @@ export const providerServices = {
       return { data: null, error: { message: "Something went wrong", error } };
     }
   },
+  getProviderMeals:async function(){
+
+
+    try {
+      const cookieStore=await cookies()
+        const {data}=await userService.getSession()
+        console.log(data.user.id)
+
+        const res=await fetch(`${url}/provider/allmeals`,{
+          headers:{
+            Cookie:cookieStore.toString()
+          }
+        })
+        const meals=await res.json()
+
+        // if(!res.ok){
+        //   return {data:null,error:{message:"Something went wrong"}}
+        // }
+
+        return{data:meals,error:null}
+
+    } catch (error) {
+       return { data: null, error: { message: "Something went wrong", error } };
+    }
+  }
 };
