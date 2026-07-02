@@ -73,5 +73,6 @@ export const providerServices = {
     } catch (error) {
       return { data: null, error: { message: "Something went wrong", error } };
     }
-  }
+  },
+  
 };
