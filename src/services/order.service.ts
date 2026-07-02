@@ -48,4 +48,19 @@ export const orderServices = {
       return { data: null, error: { message: "Something Went Wrong!", error } };
     }
   },
+  getProviderAllOrders:async function () {
+    const cookieStore=await cookies()
+    try {
+      const res=await fetch(`${url}/orders/provider`,{
+        headers:{
+          Cookie:cookieStore.toString()
+        }
+      })
+      const data=await res.json()
+      return {data,error:null}
+
+    } catch (error) {
+      return { data: null, error: { message: "Something Went Wrong!", error } };
+    }
+  }
 };

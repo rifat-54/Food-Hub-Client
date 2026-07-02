@@ -10,7 +10,7 @@ export default async function MealsPage() {
 
   return (
     <div className='container'>
-      <ProviderMealsPageCard meals={data?.meals}/>
+      <ProviderMealsPageCard data={data}/>
       
       <MealsTable meals={data?.meals}/>
       </div>

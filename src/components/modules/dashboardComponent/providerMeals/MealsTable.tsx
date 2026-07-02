@@ -1,3 +1,5 @@
+"use client";
+import { deleteMeals } from "@/actions/provider.action";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -6,13 +8,36 @@ import {
   TableCaption,
   TableCell,
   TableHead,
-  TableHeader,
+  TableHeader, 
   TableRow,
 } from "@/components/ui/table";
+import { providerServices } from "@/services/provider.service";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 
 export default function MealsTable({ meals }: { meals: any }) {
+
+    const router=useRouter()
+  
+    const handleDeletemeal = async (id: string) => {
+      const result = await deleteMeals(id);
+        if(result.data.id){
+
+            toast.success("Successfully Delated")
+            router.refresh()
+        }else{
+            toast.error(result.data.message)
+        }
+
+      console.log(result);
+    };
+
+
+
+
   return (
     <Table>
       <TableCaption>A list of your recent invoices.</TableCaption>
@@ -52,7 +77,12 @@ export default function MealsTable({ meals }: { meals: any }) {
               <Button className="bg-blue-400">Edit</Button>
             </TableCell>
             <TableCell className="text-center text-red-500">
-              <Button variant={"outline"}>Delete</Button>
+              <Button
+                onClick={() => handleDeletemeal(item.id)}
+                variant={"outline"}
+              >
+                Delete
+              </Button>
             </TableCell>
           </TableRow>
         ))}
