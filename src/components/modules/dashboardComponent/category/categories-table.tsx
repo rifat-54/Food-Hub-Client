@@ -17,6 +17,9 @@ import {
 } from "@/components/ui/table";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { deleteCategory } from "@/actions/category.action";
+import { toast } from "sonner";
 
 type Category = {
   id: string;
@@ -32,6 +35,22 @@ interface CategoriesTableProps {
 export function CategoriesTable({
   categories,
 }: CategoriesTableProps) {
+
+
+    const handleDeleteCategory=async(id:string)=>{
+        try {
+        const { data } = await deleteCategory(id);
+        console.log(data);
+        if(data){
+            toast.success("Successfully deleted!")
+        }
+       
+       
+      } catch (error) {
+        toast.error(error instanceof Error?error.message:"Something went wrong")
+      }
+    }
+
   return (
     <Card>
       <CardHeader>
@@ -46,7 +65,7 @@ export function CategoriesTable({
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Created</TableHead>
-              <TableHead>Updated</TableHead>
+              <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -69,9 +88,7 @@ export function CategoriesTable({
                 </TableCell>
 
                 <TableCell>
-                  {new Date(category.updatedAt).toLocaleDateString(
-                    "en-GB"
-                  )}
+                  <Button onClick={()=>handleDeleteCategory(category.id)} variant={"outline"} className="text-red-500">Delete</Button>
                 </TableCell>
               </TableRow>
             ))}

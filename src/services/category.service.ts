@@ -11,6 +11,9 @@ export const categoryServices={
             const res=await fetch(`${url}/category`,{
                 headers:{
                     Cookie:cookieStore.toString()
+                },
+                next:{
+                    tags:["get-all-category"]
                 }
             })
             const data=await res.json()
@@ -38,5 +41,23 @@ export const categoryServices={
             return {data:null,error:{message:"Something went wrong",error}}
         }
     },
+    deleteCategory:async function (id:string) {
+        try {
+            const cookieStore=await cookies()
+            const res=await fetch(`${url}/category/${id}`,{
+                method:"DELETE",
+                headers:{
+                    Cookie:cookieStore.toString(),
+                
+                },
+            })
+            const data=await res.json()
+
+            return {data,error:null}
+        } catch (error) {
+            return {data:null,error:{message:"Something went wrong",error}}
+        }
+    },
+    
 
 }
