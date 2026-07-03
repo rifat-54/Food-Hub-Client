@@ -41,9 +41,9 @@ const statusVariant = {
 export function AllOrdersTable({ orders }: OrderTableProps) {
   return (
     <>
-      <Card>
+      <Card className="mt-5">
         <CardHeader>
-          <CardTitle>Total Orders ({orders.length})</CardTitle>
+          {/* <CardTitle>Total Orders ({orders.length})</CardTitle> */}
         </CardHeader>
 
         <CardContent>
