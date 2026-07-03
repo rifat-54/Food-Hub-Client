@@ -23,16 +23,17 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 export default function OrderTable({ orders }: { orders: any }) {
-  const handleOrderStatus = async (id: string, value: OrderStatus) => {
     
+  const handleOrderStatus = async (id: string, value: OrderStatus) => {
+     
     try {
       const result = await updateOrderStatus(id, { status: value });
       console.log("result ->", result);
       if (result.data) {
         toast.success("Successfully Updated Order Status");
       }
-    } catch (error:any) {
-        toast.error(error.message)
+    } catch (error) {
+        toast.error(error instanceof Error?error.message:"Something Went Wrong!")
     }
   };
 
@@ -72,17 +73,18 @@ export default function OrderTable({ orders }: { orders: any }) {
                 onValueChange={(value: OrderStatus) =>
                   handleOrderStatus(order.id, value)
                 }
+                disabled={order.status===OrderStatus.CANCELLED || order.status===OrderStatus.DELIVERED}
               >
                 <SelectTrigger className="w-[150px]">
                   <SelectValue />
                 </SelectTrigger>
 
                 <SelectContent>
-                  <SelectItem value="PLACED">Placed</SelectItem>
-                  <SelectItem value="PREPARING">Preparing</SelectItem>
-                  <SelectItem value="READY">Ready</SelectItem>
-                  <SelectItem value="DELIVERED">Delivered</SelectItem>
-                  <SelectItem value="CANCELLED">Cancelled</SelectItem>
+                  <SelectItem value={OrderStatus.PLACED}>Placed</SelectItem>
+                  <SelectItem value={OrderStatus.PREPARING}>Preparing</SelectItem>
+                  <SelectItem value={OrderStatus.READY}>Ready</SelectItem>
+                  <SelectItem value={OrderStatus.DELIVERED}>Delivered</SelectItem>
+                  <SelectItem value={OrderStatus.CANCELLED}>Cancelled</SelectItem>
                 </SelectContent>
               </Select>
             </TableCell>

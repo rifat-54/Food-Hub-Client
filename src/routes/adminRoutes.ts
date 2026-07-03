@@ -8,8 +8,16 @@ export const adminRoute=[
                 url:"/admin-dashboard"
             },
             {
-                title:"Dashboard",
-                url:"/dashboard"
+                title:"Users",
+                url:"/admin-dashboard/users"
+            },
+            {
+                title:"Orders",
+                url:"/admin-dashboard/orders"
+            },
+            {
+                title:"Category",
+                url:"/admin-dashboard/category"
             },
             
         ]
