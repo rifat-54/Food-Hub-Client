@@ -29,31 +29,7 @@ export default function OrderCard({ order }: OrderCardProps) {
       toast.error("Failed to cancel order");
     }
 
-    // const result = await orderServices.updateOrderStatus(order.id, {
-    //   status: OrderType.CANCELLED,
-    // });
 
-    // console.log(result);
-
-    // router.refresh()
-
-    // const payload = {
-    //   status: OrderType.CANCELLED,
-    // };
-    // const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/orders/${order.id}`, {
-    //   method: "PATCH",
-    //   credentials:"include",
-    //   headers: {
-    //     "Content-Type": "application/json",
-
-    //   },
-    //   body: JSON.stringify(payload),
-    // });
-    // const data = await res.json();
-
-    // console.log(data)
-
-    // router.push("/dashboard/myorders")
   };
 
   return (

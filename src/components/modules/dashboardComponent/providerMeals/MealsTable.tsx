@@ -11,14 +11,16 @@ import {
   TableHeader, 
   TableRow,
 } from "@/components/ui/table";
-import { providerServices } from "@/services/provider.service";
+
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 
 
 export default function MealsTable({ meals }: { meals: any }) {
+
 
     const router=useRouter()
   
@@ -53,16 +55,19 @@ export default function MealsTable({ meals }: { meals: any }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {meals.map((item: any) => (
+        {meals?.map((item: any) => (
           <TableRow key={item.id}>
             <TableCell>
               <div className="relative h-16 w-16 overflow-hidden rounded-lg">
-                <Image
-                  fill
+                <img
                   className="object-cover"
                   alt={item.name}
-                  src={item?.image}
+                  src={item.image}
+                  onError={(e)=>e.currentTarget.src="/file.svg"}
+                  
                 />
+
+                {/* {item.image} */}
               </div>
             </TableCell>
             <TableCell className="font-medium">{item.name}</TableCell>

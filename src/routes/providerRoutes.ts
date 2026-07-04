@@ -13,6 +13,10 @@ export const providerRoute=[
             {
                 title:"Orders",
                 url:"/provider-dashboard/orders"
+            },
+            {
+                title:"Add Meal",
+                url:"/provider-dashboard/addmeal"
             }
         ]
 
