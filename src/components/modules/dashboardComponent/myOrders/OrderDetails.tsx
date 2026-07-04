@@ -9,6 +9,7 @@ interface OrderDetailsProps {
 }
 
 export default function OrderDetails({ order }: OrderDetailsProps) {
+  console.log(order)
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -38,7 +39,8 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
         <div className="space-y-4">
           {order.orderItems.map((item: any) => (
             <OrderItemCard
-              key={item.meal.id}
+            status={order.status}
+              key={item.meal.name}
               item={item}
             />
           ))}
