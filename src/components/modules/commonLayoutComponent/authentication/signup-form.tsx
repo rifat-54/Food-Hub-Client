@@ -17,38 +17,43 @@ import {
 import { Input } from "@/components/ui/input";
 import { env } from "@/env";
 import { authClient } from "@/lib/auth-client";
+import { UserRole } from "@/types/user.types";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
 import * as z from "zod";
-
-
+import RoleSelector from "./RoleSelector";
+import ProviderFields from "./ProviderFields";
 
 const formSchema = z
   .object({
     name: z.string().min(1, "This field is required"),
     email: z.email(),
     password: z.string().min(8, "Minium length is 8"),
-    confirmPassword: z.string().min(1)
+    confirmPassword: z.string().min(1),
+    role: z.enum([UserRole.USER, UserRole.PROVIDER]),
+    restaurantName: z.string(),
+    description: z.string(),
+    address: z.string(),
+    image: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password doesn't match",
     path: ["confirmPassword"],
   });
 
-  const handleGoogleLogin=async()=>{
-    const data=await authClient.signIn.social({
-      provider:"google",
-      callbackURL:env.NEXT_PUBLIC_FRONTEND_URL
-    })
-  }
-
-
+const handleGoogleLogin = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+    callbackURL: env.NEXT_PUBLIC_FRONTEND_URL,
+  });
+};
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-  const router=useRouter()
+  const router = useRouter();
+
 
 
   const form = useForm({
@@ -57,6 +62,11 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       email: "",
       password: "",
       confirmPassword: "",
+      role: UserRole.USER,
+      restaurantName: "",
+      description: "",
+      address: "",
+      image: "",
     },
     validators: {
       // onBlur:formSchema,
@@ -78,13 +88,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         }
 
         toast.success("Account created successfully", { id: toastId });
-        form.reset()
-        router.push("/")
+        form.reset();
+        router.push("/");
       } catch (error) {
         toast.error("Something went wrong. Try Again", { id: toastId });
       }
     },
   });
+
+
+  console.log(form.state.values.role)
+
 
   return (
     <Card {...props}>
@@ -207,10 +221,41 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               }}
             />
 
+            <form.Field
+              name="role"
+              children={(field) => (
+                <RoleSelector
+                  value={field.state.value}
+                  onChange={(value)=>field.handleChange(value)}
+                />
+              )}
+            />
+
+            {
+              form.state.values.role===UserRole.PROVIDER && (
+                <ProviderFields form={form}/>
+              )
+            }
+
+            <form.Subscribe
+            selector={(state)=>state.values.role}
+            >
+              {
+                (role)=> role===UserRole.PROVIDER ? (<ProviderFields form={form}/>) :null
+              }
+            </form.Subscribe>
+ 
+
             <FieldGroup>
               <Field>
-                <Button type="submit" disabled={form.state.isSubmitting}>{form.state.isSubmitting?"Creating...":"Create Account"}</Button>
-                <Button onClick={()=>handleGoogleLogin()} variant="outline" type="button">
+                <Button type="submit" disabled={form.state.isSubmitting}>
+                  {form.state.isSubmitting ? "Creating..." : "Create Account"}
+                </Button>
+                <Button
+                  onClick={() => handleGoogleLogin()}
+                  variant="outline"
+                  type="button"
+                >
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">
