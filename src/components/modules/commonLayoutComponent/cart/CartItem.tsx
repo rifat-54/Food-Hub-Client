@@ -27,10 +27,10 @@ export default function CartItem({ item }: CartItemProps) {
       <CardContent className="flex flex-col gap-5 p-5 sm:flex-row">
         {/* Image */}
         <div className="relative h-32 w-full overflow-hidden rounded-lg sm:h-28 sm:w-36">
-          <Image
+          <img
             src={item.image}
             alt={item.name}
-            fill
+            
             className="object-cover"
           />
         </div>

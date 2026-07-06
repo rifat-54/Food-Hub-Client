@@ -63,5 +63,6 @@ export const config = {
     "/admin-dashboard/:path*",
     "/provider-dashboard",
     "/provider-dashboard/:path*",
+    "/updateprofile"
   ],
 };

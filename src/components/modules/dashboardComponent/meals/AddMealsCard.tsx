@@ -92,7 +92,7 @@ export default function AddMealsCard({ categories }: CategoryProps) {
         <CardTitle className="text-3xl">Add New Meal</CardTitle>
 
         <CardDescription>
-          Fill in the information below to create a new meal.
+           in the information below to create a new meal.
         </CardDescription>
       </CardHeader>
 

@@ -51,7 +51,7 @@ export function Reviews() {
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Star
                       key={index}
-                      className="h-5 w-5 fill-yellow-400 text-yellow-400"
+                      className="h-5 w-5 -yellow-400 text-yellow-400"
                     />
                   ))}
                 </div>

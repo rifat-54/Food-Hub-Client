@@ -60,7 +60,7 @@ export function Hero() {
           <div className="relative">
             <div className="absolute -left-10 top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
 
-            <Image
+            <img
               src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
               alt="Delicious Food"
               width={650}

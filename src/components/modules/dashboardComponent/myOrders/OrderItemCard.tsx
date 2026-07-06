@@ -16,7 +16,7 @@ export default function OrderItemCard({ item,status }: Props) {
       <CardContent className="flex gap-5 p-5">
         <div className="relative h-24 w-24 overflow-hidden rounded-lg">
          
-            <Image src={item.meal.image || "/placeholder.jpg"} alt={item.meal.name} fill />
+            <img src={item.meal.image || "/placeholder.jpg"} alt={item.meal.name}  />
          
         </div>
 

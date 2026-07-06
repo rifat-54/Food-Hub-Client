@@ -26,6 +26,9 @@ import { toast } from "sonner";
 import * as z from "zod";
 import RoleSelector from "./RoleSelector";
 import ProviderFields from "./ProviderFields";
+import { createProviderProfile } from "@/actions/provider.action";
+import { useEffect, useState } from "react";
+import { Role } from "@/constant/role";
 
 const formSchema = z
   .object({
@@ -37,24 +40,31 @@ const formSchema = z
     restaurantName: z.string(),
     description: z.string(),
     address: z.string(),
-    image: z.string(),
+    image: z.string().url("Please enter a valid URL"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password doesn't match",
     path: ["confirmPassword"],
   });
 
-const handleGoogleLogin = async () => {
-  const data = await authClient.signIn.social({
-    provider: "google",
-    callbackURL: env.NEXT_PUBLIC_FRONTEND_URL,
-  });
-};
-
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
 
+  const { data: session } = authClient.useSession();
 
+  useEffect(() => {
+    if (!session) return;
+
+    const role = localStorage.getItem("signup-role");
+
+    if (role === UserRole.PROVIDER) {
+      localStorage.removeItem("signup-role");
+      router.replace("/updateprofile");
+    } else {
+      localStorage.removeItem("signup-role");
+      router.replace("/");
+    }
+  }, [session, router]);
 
   const form = useForm({
     defaultValues: {
@@ -74,17 +84,39 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
     onSubmit: async ({ value }) => {
       const toastId = toast.loading("Creating User...");
-      // console.log("on submit called", value);
+      console.log("on submit called", value);
 
-      const { confirmPassword, ...userData } = value;
+      // const { confirmPassword, ...userData } = value;
+
+      const userData = {
+        name: value.name,
+        email: value.email,
+        password: value.password,
+        role: value.role,
+      };
+
+      const providerData = {
+        address: value.address,
+        description: value.description,
+        image: value.image,
+        restaurantName: value.restaurantName,
+      };
+
+      console.log(userData);
+      console.log(providerData);
 
       try {
         const { data, error } = await authClient.signUp.email(userData);
-        // console.log(data, error);
+        console.log(data, error);
 
         if (error) {
           toast.error(error?.message, { id: toastId });
           return;
+        }
+
+        if (value.role === UserRole.PROVIDER) {
+          const pdata = await createProviderProfile(providerData);
+          console.log(pdata);
         }
 
         toast.success("Account created successfully", { id: toastId });
@@ -96,9 +128,18 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
   });
 
+  console.log(form.state.values.role);
 
-  console.log(form.state.values.role)
+  const handleGoogleLogin = async () => {
+    const userRole = form.state.values.role;
 
+    localStorage.setItem("signup-role", userRole);
+
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: `${env.NEXT_PUBLIC_FRONTEND_URL}/signup`,
+    });
+  };
 
   return (
     <Card {...props}>
@@ -226,25 +267,18 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               children={(field) => (
                 <RoleSelector
                   value={field.state.value}
-                  onChange={(value)=>field.handleChange(value)}
+                  onChange={(value) => field.handleChange(value)}
                 />
               )}
             />
 
-            {
-              form.state.values.role===UserRole.PROVIDER && (
-                <ProviderFields form={form}/>
-              )
-            }
-
-            <form.Subscribe
-            selector={(state)=>state.values.role}
-            >
-              {
-                (role)=> role===UserRole.PROVIDER ? (<ProviderFields form={form}/>) :null
+            <form.Subscribe selector={(state) => state.values.role}>
+              {(role) =>
+                role === UserRole.PROVIDER ? (
+                  <ProviderFields form={form} />
+                ) : null
               }
             </form.Subscribe>
- 
 
             <FieldGroup>
               <Field>

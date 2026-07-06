@@ -47,7 +47,7 @@ export function MealDetails({ meal }: MealDetailsProps) {
         {/* Image */}
 
         <div className="overflow-hidden rounded-2xl border">
-          <Image
+          <img
             src={meal.image}
             alt={meal.name}
             width={700}
@@ -60,7 +60,7 @@ export function MealDetails({ meal }: MealDetailsProps) {
 
         <div className="flex flex-col">
           <div className="mb-6 flex items-center gap-2">
-            <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+            <Star className="h-5 w-5 -yellow-400 text-yellow-400" />
             <span className="font-medium">
               4.9 (250 Reviews)
             </span>

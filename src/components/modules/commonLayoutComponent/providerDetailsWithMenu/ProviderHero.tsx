@@ -22,10 +22,10 @@ export default function ProviderHero({
   return (
     <section className="overflow-hidden rounded-xl border">
       <div className="relative h-72 w-full">
-        <Image
+        <img
           src={provider.image}
           alt={provider.restaurantName}
-          fill
+          
           className="object-cover"
         />
       </div>

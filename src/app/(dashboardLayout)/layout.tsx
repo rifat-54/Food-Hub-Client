@@ -28,19 +28,13 @@ export default async function DashboardLayout({
   admin: React.ReactNode;
   provider: React.ReactNode;
 }) {
+  const { data } = await userService.getSession();
 
-  
-    const{data}=await userService.getSession()
+  // if(!data){
+  //   return redirect("/login")
+  // }
 
-    // if(!data){
-    //   return redirect("/login")
-    // }
-
-
- 
-
-    const role=data?.user?.role
-
+  const role = data?.user?.role;
 
   return (
     <SidebarProvider>
@@ -66,11 +60,9 @@ export default async function DashboardLayout({
         </header>
 
         <div className="flex flex-1 flex-col gap-4 p-4">
-
-            {role===Role.USER && user}
-            {role===Role.ADMIN && admin}
-            {role===Role.PROVIDER && provider}
-       
+          {role === Role.USER && user}
+          {role === Role.ADMIN && admin}
+          {role === Role.PROVIDER && provider}
         </div>
       </SidebarInset>
     </SidebarProvider>

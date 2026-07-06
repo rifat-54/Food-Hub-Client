@@ -59,8 +59,8 @@ export default function MealsTable({ meals }: { meals: any }) {
           <TableRow key={item.id}>
             <TableCell>
               <div className="relative h-16 w-16 overflow-hidden rounded-lg">
-                <Image
-                fill
+                <img
+                
                   className="object-cover"
                   alt={item.name}
                   src={item.image}

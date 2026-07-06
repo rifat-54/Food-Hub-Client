@@ -29,8 +29,8 @@ export function MealCard({ meal }: MealCardProps) {
   return (
     <Card className="group overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div className="relative h-56 overflow-hidden">
-        <Image
-        fill
+        <img
+        
           src={meal.image}
           alt={meal.name}
           // onError={(e)=>e.currentTarget.src="/placeholder.jpg"}
