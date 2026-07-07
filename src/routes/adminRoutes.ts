@@ -1,11 +1,11 @@
 
 export const adminRoute=[
     {
-        title:"admin Routes",
+        title:"Admin Dashboard",
         items:[
             {
-                title:"Dashboard",
-                url:"/admin-dashboard"
+                title:"Home",
+                url:"/"
             },
             {
                 title:"Users",

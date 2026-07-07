@@ -79,8 +79,8 @@ const Navbar1 = ({
       url: "/provider",
     },
     {
-      title: "Pricing",
-      url: "#",
+      title: "Dashboard",
+      url: "/dashboard",
     },
   ],
   auth = {

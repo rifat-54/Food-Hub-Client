@@ -44,7 +44,7 @@ export function PopularRestaurants() {
           </div>
 
           <Button variant="outline" asChild>
-            <Link href="#">
+            <Link href="/provider">
               View All
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

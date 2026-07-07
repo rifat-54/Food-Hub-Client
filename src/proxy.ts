@@ -41,6 +41,7 @@ export async function proxy(request: NextRequest) {
   const isDashboard = pathName.startsWith("/dashboard");
   const isAdminDashboard = pathName.startsWith("/admin-dashboard");
   const isProviderDashboard = pathName.startsWith("/provider-dashboard");
+  const isUpdateProfile=pathName.startsWith("/updateprofile")
 
   if (isAdmin && !isAdminDashboard) {
     return NextResponse.redirect(new URL("/admin-dashboard", request.url));
@@ -48,7 +49,7 @@ export async function proxy(request: NextRequest) {
   if (isProvider && !isProviderDashboard) {
     return NextResponse.redirect(new URL("/provider-dashboard", request.url));
   }
-  if (isUser && !isDashboard) {
+  if (isUser && !(isDashboard || isUpdateProfile)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 

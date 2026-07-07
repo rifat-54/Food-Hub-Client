@@ -23,10 +23,10 @@ export default function ProviderCard({ provider }: ProviderCardProps) {
     <Card className="overflow-hidden transition hover:shadow-lg">
       <div className="relative h-56 w-full">
         <img
-          src={provider.image}
-          alt={provider.restaurantName}
           
-          className="object-cover"
+          src={provider.image || "/placeholder.jpg"}
+          alt={provider.restaurantName}
+          className="object-cover h-full w-full"
         />
       </div>
 

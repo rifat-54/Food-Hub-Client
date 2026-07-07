@@ -1,10 +1,10 @@
 export const providerRoute=[
     {
-        title:"provider Routes",
+        title:"Restaurant Dashboard",
         items:[
             {
-                title:"Dashboard",
-                url:"/provider-dashboard" 
+                title:"Home",
+                url:"/" 
             },
             {
                 title:"Meals",

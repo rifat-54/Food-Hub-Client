@@ -1,8 +1,12 @@
 
 export const userRoute=[
     {
-        title:"User Routes",
+        title:"User Dashboard",
         items:[
+            {
+                title:"Home",
+                url:"/"
+            },
             {
                 title:"View Cart",
                 url:"/cart"
@@ -14,6 +18,10 @@ export const userRoute=[
             {
                 title:"My Orders",
                 url:"/dashboard/myorders"
+            },
+            {
+                title:"Menu",
+                url:"/meals"
             },
             
         ]

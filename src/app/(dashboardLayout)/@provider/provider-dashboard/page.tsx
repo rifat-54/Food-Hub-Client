@@ -1,7 +1,6 @@
+import { redirect } from 'next/navigation'
 import React from 'react'
 
 export default function ProviderDashboard() {
-  return (
-    <div>ProviderDashboard</div>
-  )
+  return redirect("provider-dashboard/meals")
 }

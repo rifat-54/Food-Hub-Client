@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react";
 
 import { SearchForm } from "@/components/search-form";
@@ -5,6 +6,7 @@ import { VersionSwitcher } from "@/components/version-switcher";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -20,6 +22,11 @@ import { adminRoute } from "@/routes/adminRoutes";
 import { Role } from "@/constant/role";
 import { providerRoute } from "@/routes/providerRoutes";
 import { userRoute } from "@/routes/userRoutes";
+import { Button } from "./ui/button";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
 
 // This is sample data.
 const data = {
@@ -65,46 +72,68 @@ export function AppSidebar({
   user,
   ...props
 }: { user: { role: string } } & React.ComponentProps<typeof Sidebar>) {
-
   let routes: Route[] = [];
 
   switch (user?.role) {
-
     case Role.ADMIN:
       routes = adminRoute;
-      break
+      break;
     case Role.PROVIDER:
-      routes=providerRoute
-      break
+      routes = providerRoute;
+      break;
     case Role.USER:
-      routes=userRoute
-      break
+      routes = userRoute;
+      break;
     default:
-      routes=[]
-      break
-
-
+      routes = [];
+      break;
   }
+
+  const commonRoute = [
+    {
+      title: "Account",
+      items: [
+        {
+          title: "View Profile",
+          url: "/dashbaod",
+        },
+      ],
+    },
+  ];
+
+
+  const router=useRouter()
+
+    const handleLogout=async()=>{
+      const {data}=await authClient.signOut()
+      console.log("logout-> ",data)
+  
+      if(data?.success){
+        toast.success("Successfully Logout!")
+        router.refresh()
+      }
+    }
 
   return (
     <Sidebar {...props}>
-      <SidebarHeader>
+      {/* <SidebarHeader>
         <VersionSwitcher
           versions={data.versions}
           defaultVersion={data.versions[0]}
         />
         <SearchForm />
-      </SidebarHeader>
+      </SidebarHeader> */}
+
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
-        { routes?.map((item) => (
+        {routes?.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items?.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild >
+                    <SidebarMenuButton asChild>
                       <Link href={item.url}>{item.title}</Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -114,7 +143,32 @@ export function AppSidebar({
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarRail />
+
+      {/* <SidebarRail /> */}
+
+      {commonRoute?.map((item) => (
+        <SidebarGroup key={item.title}>
+          <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {item.items?.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>{item.title}</Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      ))}
+      
+
+      <SidebarFooter>
+        <Button onClick={handleLogout} className="w-full" variant="destructive">
+          Logout
+        </Button>
+      </SidebarFooter>
     </Sidebar>
   );
 }

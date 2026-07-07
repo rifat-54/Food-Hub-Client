@@ -28,13 +28,16 @@ export function Hero() {
 
             <div className="mt-8 flex flex-wrap gap-4">
               <Button size="lg" asChild>
-                <Link href="/menu">
+                <Link href="/meals">
                   Browse Meals
                 </Link>
               </Button>
 
               <Button size="lg" variant="outline">
-                Become a Provider
+                <Link href="/updateprofile">
+                   Become a Provider
+                </Link>
+               
               </Button>
             </div>
 
@@ -60,7 +63,7 @@ export function Hero() {
           <div className="relative">
             <div className="absolute -left-10 top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
 
-            <img
+            <Image
               src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg"
               alt="Delicious Food"
               width={650}

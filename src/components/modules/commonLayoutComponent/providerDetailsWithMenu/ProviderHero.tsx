@@ -26,7 +26,7 @@ export default function ProviderHero({
           src={provider.image}
           alt={provider.restaurantName}
           
-          className="object-cover"
+         className="object-cover h-full w-full"
         />
       </div>
 

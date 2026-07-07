@@ -72,9 +72,9 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card {...props}>
       <CardHeader>
-        <CardTitle>Create an account</CardTitle>
+        <CardTitle>Login</CardTitle>
         <CardDescription>
-          Enter your information below to create your account
+          Enter your information below to Login your account
         </CardDescription>
       </CardHeader>
       <CardContent>

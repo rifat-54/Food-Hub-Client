@@ -33,7 +33,8 @@ export default function MealCard({
   return (
     <Card className="overflow-hidden transition hover:shadow-lg">
       <div className="relative h-52 w-full">
-        <img
+        <Image
+        fill
           src={meal.image}
           alt={meal.name}
           

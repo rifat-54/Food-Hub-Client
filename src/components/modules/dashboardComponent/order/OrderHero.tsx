@@ -32,23 +32,23 @@ export function OrdersHero({ orders }: OrdersHeroProps) {
   const totalOrders = orders.length;
 
   const pendingOrders = orders.filter(
-    (order) => order.status === "PENDING"
+    (order) => order.status === "PENDING",
   ).length;
 
   const processingOrders = orders.filter(
-    (order) => order.status === "PROCESSING"
+    (order) => order.status === "PROCESSING",
   ).length;
 
   const shippedOrders = orders.filter(
-    (order) => order.status === "SHIPPED"
+    (order) => order.status === "SHIPPED",
   ).length;
 
   const deliveredOrders = orders.filter(
-    (order) => order.status === "DELIVERED"
+    (order) => order.status === "DELIVERED",
   ).length;
 
   const cancelledOrders = orders.filter(
-    (order) => order.status === "CANCELLED"
+    (order) => order.status === "CANCELLED",
   ).length;
 
   const totalRevenue = orders
@@ -108,35 +108,40 @@ export function OrdersHero({ orders }: OrdersHeroProps) {
   ];
 
   return (
-    <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {stats.map((stat) => {
-        const Icon = stat.icon;
+    <>
+      <div className="mb-10">
+        <h1 className="text-3xl font-bold">Orders</h1>
 
-        return (
-          <Card
-            key={stat.title}
-            className="shadow-sm transition-all hover:shadow-md"
-          >
-            <CardContent className="flex items-center justify-between p-6">
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  {stat.title}
-                </p>
+        <p className="text-muted-foreground mt-1">
+          See All Orders in one place.
+        </p>
+      </div>
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
 
-                <h2 className="mt-2 text-3xl font-bold">
-                  {stat.value}
-                </h2>
-              </div>
+          return (
+            <Card
+              key={stat.title}
+              className="shadow-sm transition-all hover:shadow-md"
+            >
+              <CardContent className="flex items-center justify-between p-6">
+                <div>
+                  <p className="text-sm text-muted-foreground">{stat.title}</p>
 
-              <div
-                className={`flex h-14 w-14 items-center justify-center rounded-full ${stat.bgClass}`}
-              >
-                <Icon className={`h-7 w-7 ${stat.iconClass}`} />
-              </div>
-            </CardContent>
-          </Card>
-        );
-      })}
-    </section>
+                  <h2 className="mt-2 text-3xl font-bold">{stat.value}</h2>
+                </div>
+
+                <div
+                  className={`flex h-14 w-14 items-center justify-center rounded-full ${stat.bgClass}`}
+                >
+                  <Icon className={`h-7 w-7 ${stat.iconClass}`} />
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </section>
+    </>
   );
 }

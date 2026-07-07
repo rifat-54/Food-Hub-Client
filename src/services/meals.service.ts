@@ -4,10 +4,25 @@ import { cookies } from "next/headers";
 
 const url = env.API_URL;
 
+type MealFilter = {
+  search?: string;
+  category?: string;
+  cuisine?: string;
+  dietary?: string;
+};
+
 export const mealServices = {
-  getMeals: async function () {
+  getMeals: async function (filter: MealFilter={}) {
+    console.log(filter);
     try {
-      const res = await fetch(`${url}/menu`);
+      const params = new URLSearchParams();
+
+      if (filter.search) params.set("search", filter.search);
+      if (filter.category) params.set("category", filter.category);
+      if (filter.cuisine) params.set("cuisine", filter.cuisine);
+      if (filter.dietary) params.set("dietary", filter.dietary);
+
+      const res = await fetch(`${url}/menu?${params.toString()}`);
       const data = await res.json();
       return data;
     } catch (error) {
@@ -30,7 +45,7 @@ export const mealServices = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString()
+          Cookie: cookieStore.toString(),
         },
         body: JSON.stringify(data),
       });

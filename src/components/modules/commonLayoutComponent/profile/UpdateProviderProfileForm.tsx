@@ -21,23 +21,9 @@ const formSchema = z.object({
   restaurantName: z
     .string()
     .min(3, "Restaurant name must be at least 3 characters"),
-
   description: z.string().min(10, "Description must be at least 10 characters"),
-
   address: z.string().min(5, "Address is required"),
-
- image: z
-  .string()
-  .url("Please enter a valid URL")
-  .refine((url) => {
-    try {
-      const pathname = new URL(url).pathname;
-
-      return /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(pathname);
-    } catch {
-      return false;
-    }
-  })
+  image: z.string().url("Please enter a valid URL")
 });
 
 export default function UpdateProviderProfileForm() {
@@ -59,20 +45,20 @@ export default function UpdateProviderProfileForm() {
       const toastId = toast.loading("Creating provider profile...");
 
       try {
-        const {data} = await createProviderProfile(value);
+        const { data } = await createProviderProfile(value);
 
         console.log(data);
 
-        if (!data.success) {
-          toast.error(data.message, { id: toastId });
-          return;
-        }
+        // if (!data.success) {
+        //   toast.error(data.message, { id: toastId });
+        //   return;
+        // }
 
         toast.success("Provider profile created successfully.", {
           id: toastId,
         });
 
-        // router.replace("/");
+        router.replace("/");
       } catch {
         toast.error("Something went wrong.", {
           id: toastId,

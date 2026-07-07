@@ -40,7 +40,7 @@ const formSchema = z
     restaurantName: z.string(),
     description: z.string(),
     address: z.string(),
-    image: z.string().url("Please enter a valid URL"),
+    image: z.string()
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password doesn't match",
@@ -65,6 +65,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       router.replace("/");
     }
   }, [session, router]);
+
+
 
   const form = useForm({
     defaultValues: {

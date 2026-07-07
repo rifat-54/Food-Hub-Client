@@ -47,7 +47,7 @@ export function MealDetails({ meal }: MealDetailsProps) {
         {/* Image */}
 
         <div className="overflow-hidden rounded-2xl border">
-          <img
+          <Image
             src={meal.image}
             alt={meal.name}
             width={700}

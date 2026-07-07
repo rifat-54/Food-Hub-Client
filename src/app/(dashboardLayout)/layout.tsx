@@ -46,7 +46,8 @@ export default async function DashboardLayout({
             orientation="vertical"
             className="mr-2 data-vertical:h-4 data-vertical:self-auto"
           />
-          <Breadcrumb>
+
+          {/* <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href="#">Build Your Application</BreadcrumbLink>
@@ -56,7 +57,8 @@ export default async function DashboardLayout({
                 <BreadcrumbPage>Data Fetching</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
+          </Breadcrumb> */}
+
         </header>
 
         <div className="flex flex-1 flex-col gap-4 p-4">

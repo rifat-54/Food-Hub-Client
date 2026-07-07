@@ -8,15 +8,7 @@ interface MealsProps {
 export function Meals({ meals }: MealsProps) {
   return (
     <>
-      <section className="mb-10">
-        <h1 className="text-4xl font-bold tracking-tight">
-          Discover Meals
-        </h1>
-
-        <p className="mt-2 text-muted-foreground">
-          Browse delicious meals from our restaurant partners.
-        </p>
-      </section>
+      
 
       {meals?.length === 0 ? (
         <div className="rounded-lg border py-20 text-center">
