@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
         protocol:"https",
         hostname:"www.sourcesplash.com"
       },
+      {
+        protocol:"https",
+        hostname:"www.pexels.com"
+      },
     ]
   }
 };
