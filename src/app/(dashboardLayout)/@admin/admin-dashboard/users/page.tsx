@@ -3,9 +3,13 @@ import { userService } from '@/services/user.service'
 import React from 'react'
 
 export default async function UserPage() {
-    const {data}=await userService.getAllUsers()
+    const response=await userService.getAllUsers()
 
-    console.log("data ->",data)
+    if(!response){
+      return <div>Faild to load users</div>
+    }
+
+    console.log("data ->",response)
   return (
     <div className="space-y-6">
       <div>
@@ -15,7 +19,7 @@ export default async function UserPage() {
         </p>
       </div>
 
-      <UsersTable users={data.data} />
+      <UsersTable users={response?.data?.data} />
     </div>
   )
 }

@@ -24,7 +24,7 @@ export default function ProviderFields({ form }: Props) {
       {/* Restaurant Name */}
       <form.Field
         name="restaurantName"
-        children={(field) => {
+        children={(field:any) => {
           const isInvalid =
             field.state.meta.isTouched && !field.state.meta.isValid;
 
@@ -54,7 +54,7 @@ export default function ProviderFields({ form }: Props) {
       {/* Description */}
       <form.Field
         name="description"
-        children={(field) => {
+        children={(field:any) => {
           const isInvalid =
             field.state.meta.isTouched && !field.state.meta.isValid;
 
@@ -83,7 +83,7 @@ export default function ProviderFields({ form }: Props) {
       {/* Address */}
       <form.Field
         name="address"
-        children={(field) => {
+        children={(field:any) => {
           const isInvalid =
             field.state.meta.isTouched && !field.state.meta.isValid;
 
@@ -113,7 +113,7 @@ export default function ProviderFields({ form }: Props) {
       {/* Image */}
       <form.Field
         name="image"
-        children={(field) => {
+        children={(field:any) => {
           const isInvalid =
             field.state.meta.isTouched && !field.state.meta.isValid;
 
