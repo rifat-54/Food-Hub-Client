@@ -66,5 +66,22 @@ export  const userService={
         } catch (error) {
             return {data:null,error:{message:"Something Went Wrong",error}}
         }
+    },
+    getUserInfo:async function () {
+        try {
+            const cookieStore=await cookies()
+
+            const res=await fetch(`${url}/user/me`,{
+                headers:{
+                    Cookie:cookieStore.toString()
+                }
+            })
+
+            const data=await res.json()
+
+            return {data,error:null}
+        } catch (error) {
+             return {data:null,error:{message:"Something Went Wrong",error}}
+        }
     }
 }

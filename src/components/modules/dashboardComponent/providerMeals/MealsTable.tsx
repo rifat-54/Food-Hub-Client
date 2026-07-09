@@ -72,7 +72,7 @@ export default function MealsTable({ meals }: { meals: any }) {
               </div>
             </TableCell>
             <TableCell className="font-medium">{item.name}</TableCell>
-            <TableCell> ৳ {item.price}</TableCell>
+            <TableCell> $ {item.price}</TableCell>
             <TableCell>
               <Badge>{item.cuisine}</Badge>
             </TableCell>

@@ -35,7 +35,7 @@ export default function CartItem({ item }: CartItemProps) {
             <h2 className="text-xl font-semibold">{item.name}</h2>
 
             <p className="mt-2 text-lg font-medium text-primary">
-              ৳{item.price}
+              ${item.price}
             </p>
           </div>
 

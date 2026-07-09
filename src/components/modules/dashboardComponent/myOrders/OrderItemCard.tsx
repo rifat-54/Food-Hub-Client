@@ -27,7 +27,7 @@ export default function OrderItemCard({ item,status }: Props) {
             <p className="mt-2 text-muted-foreground">Qty : {item.quantity}</p>
 
             <p className="text-muted-foreground">
-              Unit Price : ৳{item.unitPrice}
+              Unit Price : ${item.unitPrice}
             </p>
           </div>
 
@@ -35,7 +35,7 @@ export default function OrderItemCard({ item,status }: Props) {
             <p className="text-sm text-muted-foreground">Subtotal</p>
 
             <p className="text-xl font-bold">
-              ৳{item.quantity * item.unitPrice}
+              ${item.quantity * item.unitPrice}
             </p>
           </div>
           {

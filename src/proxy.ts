@@ -41,15 +41,16 @@ export async function proxy(request: NextRequest) {
   const isDashboard = pathName.startsWith("/dashboard");
   const isAdminDashboard = pathName.startsWith("/admin-dashboard");
   const isProviderDashboard = pathName.startsWith("/provider-dashboard");
-  const isUpdateProfile=pathName.startsWith("/updateprofile")
+  const isProfile=pathName.startsWith("/profile")
 
-  if (isAdmin && !isAdminDashboard) {
+  if (isAdmin && !(isAdminDashboard || isProfile)) {
     return NextResponse.redirect(new URL("/admin-dashboard", request.url));
   }
-  if (isProvider && !isProviderDashboard) {
+  if (isProvider && !(isProviderDashboard || isProfile)) {
     return NextResponse.redirect(new URL("/provider-dashboard", request.url));
   }
-  if (isUser && !(isDashboard || isUpdateProfile)) {
+
+  if (isUser && !(isDashboard || isProfile)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
@@ -58,12 +59,9 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/dashboard",
     "/dashboard/:path*",
-    "/admin-dashboard",
     "/admin-dashboard/:path*",
-    "/provider-dashboard",
     "/provider-dashboard/:path*",
-    "/updateprofile"
+    "/profile/:path*",
   ],
 };

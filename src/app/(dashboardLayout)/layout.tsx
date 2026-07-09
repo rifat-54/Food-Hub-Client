@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import DashboardContent from "@/components/modules/dashboardComponent/DashboardContent";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -58,13 +59,17 @@ export default async function DashboardLayout({
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb> */}
-
         </header>
 
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {role === Role.USER && user}
-          {role === Role.ADMIN && admin}
-          {role === Role.PROVIDER && provider}
+          <DashboardContent
+            role={role}
+            user={user}
+            provider={provider}
+            admin={admin}
+          >
+            {children}
+          </DashboardContent>
         </div>
       </SidebarInset>
     </SidebarProvider>

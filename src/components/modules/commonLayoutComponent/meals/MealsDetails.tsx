@@ -71,7 +71,7 @@ export function MealDetails({ meal }: MealDetailsProps) {
           </h1>
 
           <p className="mt-4 text-4xl font-bold text-primary">
-            ৳{meal.price}
+            ${meal.price}
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">

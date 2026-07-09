@@ -38,6 +38,8 @@ export default function CheckoutForm() {
             items:cartdata
         }
 
+        console.log(payload)
+
         const res=await fetch(`${env.NEXT_PUBLIC_API_URL}/orders`,{
             method:'POST',
             credentials:"include",

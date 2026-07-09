@@ -30,7 +30,7 @@ export default function OrderSummary({ order }: any) {
           <span>Total Amount</span>
 
           <span className="text-lg font-bold">
-            ৳{order.totalAmount}
+            ${order.totalAmount}
           </span>
         </div>
 

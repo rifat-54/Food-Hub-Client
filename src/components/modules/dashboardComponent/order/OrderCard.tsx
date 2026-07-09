@@ -68,7 +68,7 @@ export default function OrderCard({ order }: OrderCardProps) {
             <div>
               <p className="text-xs text-muted-foreground">Total</p>
 
-              <p className="font-bold text-lg">৳{order.totalAmount}</p>
+              <p className="font-bold text-lg">${order.totalAmount}</p>
             </div>
           </div>
 

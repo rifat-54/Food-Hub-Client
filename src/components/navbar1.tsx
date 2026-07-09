@@ -64,7 +64,7 @@ interface Navbar1Props {
 const Navbar1 = ({
   logo = {
     url: "/",
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
+    src: "/foodhub.png",
     alt: "logo",
     title: "Food Hub",
   },
@@ -115,12 +115,13 @@ const Navbar1 = ({
             <Link href={logo.url} className="flex items-center gap-2">
               <img
                 src={logo.src}
-                className="max-h-8 dark:invert"
+                className="max-h-16 dark:invert"
                 alt={logo.alt}
               />
-              <span className="text-lg font-semibold tracking-tighter">
+              
+              {/* <span className="text-lg font-semibold tracking-tighter">
                 {logo.title}
-              </span>
+              </span> */}
             </Link>
             <div className="flex items-center">
               <NavigationMenu>

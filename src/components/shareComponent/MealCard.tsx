@@ -50,7 +50,7 @@ export function MealCard({ meal }: MealCardProps) {
             </p>
           </div>
 
-          <span className="text-lg font-bold text-primary">৳{meal.price}</span>
+          <span className="text-lg font-bold text-primary">${meal.price}</span>
         </div>
 
         <p className="line-clamp-2 text-sm text-muted-foreground">

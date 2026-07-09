@@ -63,7 +63,7 @@ export default function MealCard({
 
         <div className="flex items-center justify-between">
           <p className="text-xl font-bold">
-            ৳{meal.price}
+            ${meal.price}
           </p>
 
           <CardFooter className="flex gap-3">

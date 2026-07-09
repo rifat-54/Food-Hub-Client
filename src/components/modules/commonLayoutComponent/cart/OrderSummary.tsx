@@ -20,9 +20,9 @@ export default function OrderSummary({ items }: OrderSummaryProps) {
     0,
   );
 
-  const deliveryFee = 60;
-  const tax = Math.round(subtotal * 0.05);
-  const total = subtotal + deliveryFee + tax;
+  const deliveryFee = 2;
+  const tax =Number((subtotal * 0.05).toFixed(2));
+  const total = Number(subtotal + deliveryFee + tax).toFixed(2);
 
   return (
     <Card className="sticky top-24 h-fit">
@@ -31,24 +31,24 @@ export default function OrderSummary({ items }: OrderSummaryProps) {
 
         <div className="flex justify-between">
           <span>Subtotal</span>
-          <span>৳{subtotal}</span>
+          <span>${subtotal}</span>
         </div>
 
         <div className="flex justify-between">
           <span>Delivery Fee</span>
-          <span>৳{deliveryFee}</span>
+          <span>${deliveryFee}</span>
         </div>
 
         <div className="flex justify-between">
           <span>Tax</span>
-          <span>৳{tax}</span>
+          <span>${tax}</span>
         </div>
 
         <hr />
 
         <div className="flex justify-between text-lg font-bold">
           <span>Total</span>
-          <span>৳{total}</span>
+          <span>${total}</span>
         </div>
 
         <Link href={"/dashboard/checkout"}>

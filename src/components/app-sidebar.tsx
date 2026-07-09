@@ -95,7 +95,7 @@ export function AppSidebar({
       items: [
         {
           title: "View Profile",
-          url: "/dashbaod",
+          url: "/profile",
         },
       ],
     },
