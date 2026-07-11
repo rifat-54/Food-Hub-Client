@@ -90,11 +90,11 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   const cart = useCartStore((state) => state.cart);
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const { data } = authClient.useSession();
   console.log(data);
 
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const handleLogout=async()=>{
     const {data}=await authClient.signOut()

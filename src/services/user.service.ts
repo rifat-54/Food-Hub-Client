@@ -20,6 +20,8 @@ export  const userService={
                 },
                 cache:"no-store"
             })
+
+            console.log(res)
             const session=await res.json()
 
             if(!session){
