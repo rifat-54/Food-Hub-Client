@@ -9,7 +9,7 @@ export default async function UserPage() {
       return <div>Faild to load users</div>
     }
 
-    console.log("data ->",response)
+    // console.log("data ->",response)
   return (
     <div className="space-y-6">
       <div>
