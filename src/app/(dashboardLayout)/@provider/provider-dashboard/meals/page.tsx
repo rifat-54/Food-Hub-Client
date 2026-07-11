@@ -10,7 +10,7 @@ export default async function MealsPage() {
     return <div>Faild to load data</div>;
   }
   const data = response.data;
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="container">

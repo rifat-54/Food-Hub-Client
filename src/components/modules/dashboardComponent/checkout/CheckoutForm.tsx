@@ -23,8 +23,8 @@ export default function CheckoutForm() {
     const clearCart=useCartStore((state)=>state.clearCart)
 
     const onSubmit=async(data:any)=>{
-        console.log(data)
-        console.log(cart)
+        // console.log(data)
+        // console.log(cart)
 
         const deliveryAddress=`${data.streetAddress},${data.area},${data.city}`
 
@@ -38,7 +38,7 @@ export default function CheckoutForm() {
             items:cartdata
         }
 
-        console.log(payload)
+        // console.log(payload)
 
         const res=await fetch(`${env.NEXT_PUBLIC_API_URL}/orders`,{
             method:'POST',
@@ -59,7 +59,7 @@ export default function CheckoutForm() {
             router.push("/dashboard/myorders")
         }
 
-        console.log(resData)
+        // console.log(resData)
     }
 
   return (

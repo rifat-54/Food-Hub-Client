@@ -5,6 +5,9 @@ import { Role } from "./constant/role";
 export async function proxy(request: NextRequest) {
   console.log("proxy calledS");
 
+  console.log("Proxy cookie header:", request.headers.get("cookie"));
+console.log("Proxy cookies:", request.cookies.getAll());
+
   // const {data}=await userService.getSession()
 
   let data = null;

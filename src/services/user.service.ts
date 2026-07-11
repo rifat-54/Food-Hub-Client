@@ -1,9 +1,8 @@
 
 import { env } from '@/env'
 import { UserStatus } from '@/types/user.types'
-import { error } from 'console'
+
 import { cookies } from 'next/headers'
-import React from 'react'
 
 const authUrl=env.BETTER_AUTH_URL
 
@@ -13,6 +12,8 @@ export  const userService={
     getSession:async function(){
         try {
             const cookieStore=await cookies()
+            console.log("cookie store ->",cookieStore)
+            
             
             const res=await fetch(`${authUrl}/get-session`,{
                 headers:{
@@ -21,10 +22,11 @@ export  const userService={
                 cache:"no-store"
             })
 
-            console.log(cookieStore)
+            console.log(" res form user service ->",res)
 
-            console.log(res)
             const session=await res.json()
+
+            console.log("sessin from user service-> ",session)
 
             if(!session){
                 return{data:null,error:{message:"Something is missing"}}

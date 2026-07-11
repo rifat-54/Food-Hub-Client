@@ -6,7 +6,7 @@ import React from 'react'
 export default  async function CategoryPage() {
     const {data}=await categoryServices.getAllCategory()
 
-    console.log(data)
+    // console.log(data)
 
   return (
     <div>

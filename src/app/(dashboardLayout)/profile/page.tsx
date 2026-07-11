@@ -8,7 +8,7 @@ export default async function ProfilePage() {
     return <div>Faild to load data</div>;
   }
   const data = response.data;
-  console.log(data);
+  // console.log(data);
   return (
     <div className="container mx-auto max-w-5xl py-10">
       {data && <ProfileCard user={data.data} />}

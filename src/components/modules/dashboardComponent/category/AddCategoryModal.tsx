@@ -29,7 +29,7 @@ export function AddCategoryModal() {
     onSubmit: async ({ value }) => {
       try {
         const { data } = await createCategory(value.name);
-        console.log(data);
+        // console.log(data);
         if(data){
             toast.success("Successfully Added!")
         }

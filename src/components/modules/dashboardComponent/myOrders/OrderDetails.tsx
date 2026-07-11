@@ -9,7 +9,7 @@ interface OrderDetailsProps {
 }
 
 export default function OrderDetails({ order }: OrderDetailsProps) {
-  console.log(order)
+  // console.log(order)
   return (
     <div className="space-y-8">
       {/* Header */}

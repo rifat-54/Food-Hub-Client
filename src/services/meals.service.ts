@@ -13,7 +13,7 @@ type MealFilter = {
 
 export const mealServices = {
   getMeals: async function (filter: MealFilter={}) {
-    console.log(filter);
+    // console.log(filter);
     try {
       const params = new URLSearchParams();
 

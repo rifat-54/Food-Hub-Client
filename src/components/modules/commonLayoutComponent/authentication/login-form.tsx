@@ -53,7 +53,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
 
       try {
         const { data, error } = await authClient.signIn.email(value);
-        console.log(data, error);
+        // console.log(data, error);
 
         if (error) {
           toast.error(error?.message, { id: toastId });

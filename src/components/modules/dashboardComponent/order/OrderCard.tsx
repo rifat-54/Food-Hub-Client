@@ -25,7 +25,7 @@ export default function OrderCard({ order }: OrderCardProps) {
       });
       toast.success("Order cancelled");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       toast.error("Failed to cancel order");
     }
 

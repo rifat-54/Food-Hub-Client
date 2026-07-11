@@ -20,7 +20,7 @@ export default async function MealsPage({ searchParams }: MealsPageProps) {
 
   const { data } = await categoryServices.getAllCategory();
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <main className="container mx-auto py-10 space-y-10">

@@ -40,7 +40,7 @@ export function CategoriesTable({
     const handleDeleteCategory=async(id:string)=>{
         try {
         const { data } = await deleteCategory(id);
-        console.log(data);
+        // console.log(data);
         if(data){
             toast.success("Successfully deleted!")
         }

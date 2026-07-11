@@ -16,7 +16,7 @@ export default async function MyOrdersPage() {
 
     const data=await res.json()
 
-    console.log(data)
+    // console.log(data)
   return (
     <div>
         <OrderList orders={data}/>

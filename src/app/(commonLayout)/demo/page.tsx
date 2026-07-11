@@ -6,7 +6,7 @@ export default function Demopage() {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data:any) => {
-    console.log(data)
+    // console.log(data)
   };
 
   return (

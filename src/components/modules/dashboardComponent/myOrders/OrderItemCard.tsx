@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function OrderItemCard({ item,status }: Props) {
-  console.log(item)
+  // console.log(item)
   return (
     <Card>
       <CardContent className="flex gap-5 p-5">

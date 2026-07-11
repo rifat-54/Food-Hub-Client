@@ -106,7 +106,7 @@ export function AppSidebar({
 
     const handleLogout=async()=>{
       const {data}=await authClient.signOut()
-      console.log("logout-> ",data)
+      // console.log("logout-> ",data)
   
       if(data?.success){
         toast.success("Successfully Logout!")

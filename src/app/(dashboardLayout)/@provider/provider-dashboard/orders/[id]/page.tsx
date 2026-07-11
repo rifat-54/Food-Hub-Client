@@ -15,7 +15,7 @@ export default async function OrderDetailsPage({
   }
   const data = response.data;
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <section className="container py-8">

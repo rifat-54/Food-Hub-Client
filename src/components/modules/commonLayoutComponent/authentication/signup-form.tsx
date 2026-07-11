@@ -104,12 +104,12 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         restaurantName: value.restaurantName,
       };
 
-      console.log(userData);
-      console.log(providerData);
+      // console.log(userData);
+      // console.log(providerData);
 
       try {
         const { data, error } = await authClient.signUp.email(userData);
-        console.log(data, error);
+        // console.log(data, error);
 
         if (error) {
           toast.error(error?.message, { id: toastId });
@@ -118,7 +118,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
         if (value.role === UserRole.PROVIDER) {
           const pdata = await createProviderProfile(providerData);
-          console.log(pdata);
+          // console.log(pdata);
         }
 
         toast.success("Account created successfully", { id: toastId });
@@ -130,7 +130,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
   });
 
-  console.log(form.state.values.role);
+  // console.log(form.state.values.role);
 
   const handleGoogleLogin = async () => {
     const userRole = form.state.values.role;

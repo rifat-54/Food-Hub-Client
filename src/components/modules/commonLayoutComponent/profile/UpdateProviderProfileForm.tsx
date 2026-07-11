@@ -47,7 +47,7 @@ export default function UpdateProviderProfileForm() {
       try {
         const { data } = await createProviderProfile(value);
 
-        console.log(data);
+        // console.log(data);
 
         // if (!data.success) {
         //   toast.error(data.message, { id: toastId });

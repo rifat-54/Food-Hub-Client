@@ -28,7 +28,7 @@ export default function OrderTable({ orders }: { orders: any }) {
      
     try {
       const result = await updateOrderStatus(id, { status: value });
-      console.log("result ->", result);
+      // console.log("result ->", result);
       if (result.data) {
         toast.success("Successfully Updated Order Status");
       }

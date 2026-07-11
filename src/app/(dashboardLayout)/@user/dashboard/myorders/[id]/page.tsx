@@ -8,7 +8,7 @@ export default async function OrderDetailsPage({params}:{params:Promise<{id:stri
 
     const {data}=await orderServices.getOrderById(id)
 
-    console.log(data)
+    // console.log(data)
 
 
   return (

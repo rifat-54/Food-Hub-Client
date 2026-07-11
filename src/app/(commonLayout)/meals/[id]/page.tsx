@@ -8,7 +8,7 @@ export default async function MealsDetailsPage({params}:{params:Promise<{id:stri
 
     const data=await mealServices.getMealsById(id)
 
-    console.log(data)
+    // console.log(data)
 
 
   return (

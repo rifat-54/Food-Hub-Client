@@ -9,7 +9,7 @@ export default async function ProviderMenuPage({params}:{params:Promise<{id:stri
 
     const {data}=await providerServices.getProviderWithMenu(id)
 
-    console.log(data)
+    // console.log(data)
   return (
     <main className="container mx-auto space-y-10 py-10">
       <ProviderHero provider={data} />

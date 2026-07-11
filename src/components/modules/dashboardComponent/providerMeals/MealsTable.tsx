@@ -34,7 +34,7 @@ export default function MealsTable({ meals }: { meals: any }) {
             toast.error(result.data.message)
         }
 
-      console.log(result);
+      // console.log(result);
     };
 
 

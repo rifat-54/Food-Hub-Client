@@ -9,7 +9,7 @@ export default async function OrdersPage() {
     return <div>Faild to load data</div>;
   }
   const data = response.data;
-  console.log(data);
+  // console.log(data);
   return (
     <div className="space-y-8">
       <OrderOverview data={data} />

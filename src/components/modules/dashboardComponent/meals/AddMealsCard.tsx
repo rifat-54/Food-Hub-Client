@@ -70,11 +70,11 @@ export default function AddMealsCard({ categories }: CategoryProps) {
   } = useForm<MealForm>();
 
   const onSubmit = async (data: MealForm) => {
-    console.log(data);
+    // console.log(data);
 
     try {
       const result = await createMeal(data);
-      console.log(result);
+      // console.log(result);
       if (result.data) {
         toast.success("Successfylly Added");
         reset();
