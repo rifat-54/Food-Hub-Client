@@ -21,6 +21,8 @@ export  const userService={
                 cache:"no-store"
             })
 
+            console.log(cookieStore)
+
             console.log(res)
             const session=await res.json()
 
