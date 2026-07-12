@@ -1,6 +1,10 @@
 import { userService } from "@/services/user.service";
 import { NextRequest, NextResponse } from "next/server";
 import { Role } from "./constant/role";
+import { env } from "./env";
+
+
+const authUrl=env.BETTER_AUTH_URL
 
 export async function proxy(request: NextRequest) {
   console.log("proxy calledS");
@@ -12,14 +16,27 @@ console.log("Proxy cookies:", request.cookies.getAll());
 
   let data = null;
 
-  try {
-    const session = await userService.getSession();
-    data = session.data;
-  } catch (error) {
-    console.error("Failed to get session:", error);
-  }
+  // try {
+  //   const session = await userService.getSession();
+  //   data = session.data;
+  // } catch (error) {
+  //   console.error("Failed to get session:", error);
+  // }
 
-  console.log(data);
+  const cookie = request.headers.get("cookie");
+
+const res = await fetch(`${authUrl}/get-session`, {
+  headers: {
+    Cookie: cookie ?? "",
+  },
+  cache: "no-store",
+});
+
+const session = await res.json();
+
+console.log("from proxy session",session);
+
+  data=session?.data
 
   const pathName = request.nextUrl.pathname;
 
