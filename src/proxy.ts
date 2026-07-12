@@ -2,41 +2,49 @@ import { userService } from "@/services/user.service";
 import { NextRequest, NextResponse } from "next/server";
 import { Role } from "./constant/role";
 import { env } from "./env";
+import { authClient } from "./lib/auth-client";
 
 
-const authUrl=env.BETTER_AUTH_URL
+
 
 export async function proxy(request: NextRequest) {
-  console.log("proxy calledS");
+//   console.log("proxy calledS");
 
-  console.log("Proxy cookie header:", request.headers.get("cookie"));
-console.log("Proxy cookies:", request.cookies.getAll());
+//   console.log("Proxy cookie header:", request.headers.get("cookie"));
+// console.log("Proxy cookies:", request.cookies.getAll());
 
   // const {data}=await userService.getSession()
 
   let data = null;
 
-  // try {
-  //   const session = await userService.getSession();
-  //   data = session.data;
-  // } catch (error) {
-  //   console.error("Failed to get session:", error);
-  // }
+  try {
+    const session = await userService.getSession();
+    data = session.data;
+  } catch (error) {
+    console.error("Failed to get session:", error);
+  }
 
-  const cookie = request.headers.get("cookie");
+//   const cookie = request.headers.get("cookie");
 
-const res = await fetch(`${authUrl}/get-session`, {
-  headers: {
-    Cookie: cookie ?? "",
-  },
-  cache: "no-store",
-});
+// const res = await fetch(`${authUrl}/get-session`, {
+//   headers: {
+//     Cookie: cookie ?? "",
+//   },
+//   cache: "no-store",
+// });
 
-const session = await res.json();
+// const session = await res.json();
+// console.log("Proxy cookie header:", request.headers.get("cookie"));
+// console.log("from proxy session",session);
 
-console.log("from proxy session",session);
+// const token =
+//       request.cookies.get("__Secure-session_token") ||
+//       request.cookies.get("session_token");
 
-  data=session?.data
+//       console.log("token form proxy",token)
+
+
+  // data
 
   const pathName = request.nextUrl.pathname;
 
