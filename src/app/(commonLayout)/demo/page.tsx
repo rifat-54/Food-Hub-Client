@@ -1,17 +1,11 @@
-import { userService } from "@/services/user.service";
+import { cookies } from "next/headers";
 
+export const dynamic = "force-dynamic";
 
-export default async function Demopage() {
+export default async function DemoPage() {
+  const cookieStore = await cookies();
 
+  console.log("COOKIE TEST:", cookieStore.getAll());
 
-  const data=await userService.getSession()
-
-  console.log("session form demo",data)
-
-  return (
-    <div>
-      Demo page
-     
-    </div>
-  );
+  return <div>Demo</div>;
 }
