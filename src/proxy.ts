@@ -1,23 +1,15 @@
 import { userService } from "@/services/user.service";
 import { NextRequest, NextResponse } from "next/server";
 import { Role } from "./constant/role";
-import { authClient } from "./lib/auth-client";
-
-
 
 
 
 export async function proxy(request: NextRequest) {
 //   console.log("proxy calledS");
 
-//   console.log("Proxy cookie header:", request.headers.get("cookie"));
-// console.log("Proxy cookies:", request.cookies.getAll());
 
-  // const {data}=await userService.getSession()
 
-  const ss=await authClient.getSession()
 
-  console.log("sssss->",ss)
 
   let data = null;
 
@@ -28,18 +20,8 @@ export async function proxy(request: NextRequest) {
     console.error("Failed to get session:", error);
   }
 
-//   const cookie = request.headers.get("cookie");
 
-// const res = await fetch(`${authUrl}/get-session`, {
-//   headers: {
-//     Cookie: cookie ?? "",
-//   },
-//   cache: "no-store",
-// });
 
-// const session = await res.json();
-// console.log("Proxy cookie header:", request.headers.get("cookie"));
-// console.log("from proxy session",session);
 
 // const token =
 //       request.cookies.get("__Secure-session_token") ||

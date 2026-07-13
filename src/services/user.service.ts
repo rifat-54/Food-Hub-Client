@@ -1,5 +1,6 @@
 
 import { env } from '@/env'
+import { authClient } from '@/lib/auth-client'
 import { serverFetch } from '@/lib/server-fetch'
 import { UserStatus } from '@/types/user.types'
 
@@ -91,5 +92,10 @@ export  const userService={
         } catch (error) {
              return {data:null,error:{message:"Something Went Wrong",error}}
         }
+    },
+    createLogin:async function(value:any){
+         const { data, error } = await authClient.signIn.email(value);
+
+         return data;
     }
 }

@@ -11,3 +11,9 @@ export const updateUserStatus = async (id: string, staus: UserStatus) => {
   revalidatePath("/admin-dashboard/users")
   return result;
 };
+
+
+export const createLogin=async(data:any)=>{
+  const res=await userService.createLogin(data)
+  return res;
+}
