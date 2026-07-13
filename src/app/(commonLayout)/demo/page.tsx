@@ -1,11 +1,13 @@
-import { cookies } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 export const dynamic = "force-dynamic";
 
-export default async function DemoPage() {
-  const cookieStore = await cookies();
+export default async function Demo() {
+  const h = await headers();
+  const c = await cookies();
 
-  console.log("COOKIE TEST:", cookieStore.getAll());
+  console.log("HEADER COOKIE:", h.get("cookie"));
+  console.log("COOKIE API:", c.getAll());
 
   return <div>Demo</div>;
 }
