@@ -19,7 +19,8 @@ export  const userService={
                 headers:{
                     Cookie:cookieStore.toString()
                 },
-                cache:"no-store"
+                cache:"no-store",
+                credentials:"include"
             })
 
             console.log(" res form user service ->",res)
