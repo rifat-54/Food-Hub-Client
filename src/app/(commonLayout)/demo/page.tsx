@@ -1,26 +1,17 @@
-"use client";
+import { userService } from "@/services/user.service";
 
-import { useForm } from "react-hook-form";
 
-export default function Demopage() {
-  const { register, handleSubmit } = useForm();
+export default async function Demopage() {
 
-  const onSubmit = (data:any) => {
-    // console.log(data)
-  };
+
+  const data=await userService.getSession()
+
+  console.log("session form demo",data)
 
   return (
     <div>
-      Demopage
-      <form onSubmit={handleSubmit(onSubmit)} action="">
-        <div className="flex flex-col gap-1">
-          first name
-          <input placeholder="name" type="text" {...register("name")} />
-          email
-          <input placeholder="email" type="email" {...register("email")} />
-        </div>
-        <button type="submit">submit</button>
-      </form>
+      Demo page
+     
     </div>
   );
 }
