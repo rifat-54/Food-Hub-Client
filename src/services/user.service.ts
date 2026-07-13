@@ -1,5 +1,6 @@
 
 import { env } from '@/env'
+import { serverFetch } from '@/lib/server-fetch'
 import { UserStatus } from '@/types/user.types'
 
 import { cookies } from 'next/headers'
@@ -15,12 +16,12 @@ export  const userService={
             console.log("cookie store ->",cookieStore.getAll())
             
             
-            const res=await fetch(`${authUrl}/get-session`,{
+            const res=await serverFetch(`${authUrl}/get-session`,{
                 headers:{
                     Cookie:cookieStore.toString()
                 },
                 cache:"no-store",
-                credentials:"include"
+                
             })
 
             console.log(" res form user service ->",res)
