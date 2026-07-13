@@ -1,8 +1,8 @@
 import { userService } from "@/services/user.service";
 import { NextRequest, NextResponse } from "next/server";
 import { Role } from "./constant/role";
-import { env } from "./env";
 import { authClient } from "./lib/auth-client";
+
 
 
 
@@ -14,6 +14,10 @@ export async function proxy(request: NextRequest) {
 // console.log("Proxy cookies:", request.cookies.getAll());
 
   // const {data}=await userService.getSession()
+
+  const ss=await authClient.getSession()
+
+  console.log("sssss->",ss)
 
   let data = null;
 
@@ -44,10 +48,8 @@ export async function proxy(request: NextRequest) {
 //       console.log("token form proxy",token)
 
 
-  // data
 
-  const pathName = request.nextUrl.pathname;
-
+  const pathName = request.nextUrl.pathname
   const role = data?.user?.role;
 
   let isAuthenticated = false;
