@@ -1,5 +1,5 @@
 "use client";
-import { createLogin } from "@/actions/user.action";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -53,10 +53,10 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       // console.log("on submit called", value);
 
       try {
-        // const { data, error } = await authClient.signIn.email(value);
+        const { data, error } = await authClient.signIn.email(value);
         // console.log(data, error);
 
-        const data=await createLogin(value)
+        // const data=await createLogin(value)
 
         console.log(data)
 

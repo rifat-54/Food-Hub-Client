@@ -93,9 +93,9 @@ export  const userService={
              return {data:null,error:{message:"Something Went Wrong",error}}
         }
     },
-    createLogin:async function(value:any){
-         const { data, error } = await authClient.signIn.email(value);
+    // createLogin:async function(value:any){
+    //      const { data, error } = await authClient.signIn.email(value);
 
-         return data;
-    }
+    //      return data;
+    // }
 }
