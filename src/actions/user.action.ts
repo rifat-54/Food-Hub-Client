@@ -13,7 +13,7 @@ export const updateUserStatus = async (id: string, staus: UserStatus) => {
 };
 
 
-// export const createLogin=async(data:any)=>{
-//   const res=await userService.createLogin(data)
-//   return res;
-// }
+export const createLogin=async(data:any)=>{
+  const res=await userService.createLogin(data)
+  return res;
+}
