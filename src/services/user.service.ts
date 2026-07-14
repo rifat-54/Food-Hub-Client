@@ -92,10 +92,5 @@ export  const userService={
         } catch (error) {
              return {data:null,error:{message:"Something Went Wrong",error}}
         }
-    },
-    createLogin:async function(value:any){
-         const { data, error } = await authClient.signIn.email(value);
-
-         return data;
     }
 }

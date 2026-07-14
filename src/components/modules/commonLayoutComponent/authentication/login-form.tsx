@@ -1,6 +1,5 @@
 "use client";
 
-import { createLogin } from "@/actions/user.action";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -54,17 +53,17 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       // console.log("on submit called", value);
 
       try {
-        // const { data, error } = await authClient.signIn.email(value);
-        // console.log(data, error);
+        const { data, error } = await authClient.signIn.email(value);
+        console.log(data, error);
 
-        const data=await createLogin(value)
+
 
         console.log(data)
 
-        // if (error) {
-        //   toast.error(error?.message, { id: toastId });
-        //   return;
-        // }
+        if (error) {
+          toast.error(error?.message, { id: toastId });
+          return;
+        }
 
         toast.success("Login successfully", { id: toastId });
         form.reset();
