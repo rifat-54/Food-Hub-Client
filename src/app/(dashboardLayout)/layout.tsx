@@ -1,13 +1,7 @@
+
 import { AppSidebar } from "@/components/app-sidebar";
 import DashboardContent from "@/components/modules/dashboardComponent/DashboardContent";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
@@ -15,10 +9,11 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Role } from "@/constant/role";
+import { authClient } from "@/lib/auth-client";
 import { userService } from "@/services/user.service";
 import { redirect } from "next/navigation";
 
-export default async function DashboardLayout({
+export default async  function DashboardLayout({
   children,
   user,
   admin,
@@ -31,11 +26,12 @@ export default async function DashboardLayout({
 }) {
   const { data } = await userService.getSession();
 
-  // if(!data){
-  //   return redirect("/login")
-  // }
 
-  const role = data?.user?.role;
+  if(!data){
+    return redirect("/login")
+  }
+
+  const role = data?.data?.user?.role;
 
   return (
     <SidebarProvider>
