@@ -1,25 +1,23 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import Router from "next/router";
-
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+export default function Demo() {
+  const router = useRouter();
 
-export default async function Demo() {
+  const { data, isPending } = authClient.useSession();
 
+  useEffect(() => {
+    if (!isPending && !data) {
+      router.replace("/login");
+    }
+  }, [data, isPending, router]);
 
-const { data, isPending } = authClient.useSession();
-
-useEffect(() => {
-  if (!isPending && !data) {
-    Router.replace("/login");
+  if (isPending) {
+    return <div>Loading...</div>;
   }
-}, [data, isPending]);
-
-
-
-
 
   return <div>Demo</div>;
 }
