@@ -1,12 +1,34 @@
-import OrderDetails from '@/components/modules/dashboardComponent/myOrders/OrderDetails';
+ "use client"
+ import OrderDetails from '@/components/modules/dashboardComponent/myOrders/OrderDetails';
 import { orderServices } from '@/services/order.service';
-import React from 'react'
+import { useParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 
-export default async function OrderDetailsPage({params}:{params:Promise<{id:string}>}) {
+export default function OrderDetailsPage() {
 
-    const {id}=await params;
+    const {id}=useParams();
 
-    const {data}=await orderServices.getOrderById(id)
+    console.log("id",id)
+
+    const [data,setData]=useState<any>(null)
+
+    const loadData=async()=>{
+      const response=await orderServices.getOrderById(id as string)
+      setData(response?.data)
+
+    }
+
+    useEffect(()=>{
+      if(id){
+
+        loadData()
+      }
+    },[id])
+
+    if(!data){
+      return <div>Loading...</div>
+    }
+
 
     // console.log(data)
 

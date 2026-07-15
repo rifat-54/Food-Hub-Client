@@ -2,9 +2,10 @@ import OrderCard from "./OrderCard";
 
 interface OrderListProps {
   orders: any[];
+  reload:()=>Promise<void>
 }
 
-export default function OrderList({ orders }: OrderListProps) {
+export default function OrderList({ orders,reload }: OrderListProps,) {
   return (
     <>
       <div className="mb-10">
@@ -15,8 +16,8 @@ export default function OrderList({ orders }: OrderListProps) {
         </p>
       </div>
       <div className="space-y-6">
-        {orders.map((order) => (
-          <OrderCard key={order.id} order={order} />
+        {orders?.map((order) => (
+          <OrderCard key={order.id} order={order} reload={reload}/>
         ))}
       </div>
     </>

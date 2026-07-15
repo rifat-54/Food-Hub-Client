@@ -14,16 +14,18 @@ import { OrderStatus } from "@/types/order.types";
 import { toast } from "sonner";
 
 interface OrderCardProps {
-  order: any;
+  order: any,
+  reload:()=>Promise<void>
 }
 
-export default function OrderCard({ order }: OrderCardProps) {
+export default function OrderCard({ order,reload }: OrderCardProps) {
   const handleUpdateStatus = async () => {
     try {
       const { data } = await orderServices.updateOrderStatus(order.id, {
         status: OrderStatus.CANCELLED,
       });
       toast.success("Order cancelled");
+      reload()
     } catch (error) {
       // console.error(error);
       toast.error("Failed to cancel order");

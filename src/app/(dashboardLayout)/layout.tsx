@@ -1,19 +1,19 @@
-"use client"
+"use client";
+
+import { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+
 import { AppSidebar } from "@/components/app-sidebar";
 import DashboardContent from "@/components/modules/dashboardComponent/DashboardContent";
-
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Role } from "@/constant/role";
 import { authClient } from "@/lib/auth-client";
-import { userService } from "@/services/user.service";
-import { redirect } from "next/navigation";
 
-export default   function DashboardLayout({
+export default function DashboardLayout({
   children,
   user,
   admin,
@@ -24,33 +24,47 @@ export default   function DashboardLayout({
   admin: React.ReactNode;
   provider: React.ReactNode;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const  {data,isPending} = authClient.useSession();
+  const { data, isPending } = authClient.useSession();
 
+  useEffect(() => {
+    if (isPending) return;
+
+    if (!data) {
+      router.replace("/login");
+      return;
+    }
+
+    // Redirect only when visiting "/dashboard"
+    if (pathname !== "/dashboard") return;
+
+    const role = (data.user as any).role;
+
+    if (role === "PROVIDER") {
+      router.replace("/provider-dashboard");
+    } else if (role === "ADMIN") {
+      router.replace("/admin-dashboard");
+    } else {
+      router.replace("/dashboard/myorders");
+    }
+  }, [data, isPending, pathname, router]);
 
   if (isPending) {
-  return <div>Loading...</div>;
-}
+    return <div>Loading...</div>;
+  }
 
-
-  console.log("from dashboardd",data)
-
-
-
-
-  // const { data } = await userService.getSession();
-
-  if(!data){
-    return redirect("/login")
+  if (!data) {
+    return null;
   }
 
   const role = (data.user as any).role;
 
-  console.log("role",role)
-
   return (
     <SidebarProvider>
-      <AppSidebar user={data?.user as any} />
+      <AppSidebar user={data.user as any} />
+
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -58,18 +72,6 @@ export default   function DashboardLayout({
             orientation="vertical"
             className="mr-2 data-vertical:h-4 data-vertical:self-auto"
           />
-
-          {/* <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Build Your Application</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb> */}
         </header>
 
         <div className="flex flex-1 flex-col gap-4 p-4">
