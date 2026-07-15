@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ReviewModal } from "../review/ReviewModal";
 import { OrderStatus } from "@/types/order.types";
+import { authClient } from "@/lib/auth-client";
 
 interface Props {
   item: any,
@@ -10,6 +11,14 @@ interface Props {
 }
 
 export default function OrderItemCard({ item,status }: Props) {
+
+  const {data,isPending}=authClient.useSession()
+
+  if(isPending){
+    return <div>Loading...</div>
+  }
+
+  const role=(data?.user as any)?.role
   // console.log(item)
   return (
     <Card>
@@ -39,7 +48,7 @@ export default function OrderItemCard({ item,status }: Props) {
             </p>
           </div>
           {
-            status===OrderStatus.DELIVERED && (
+            (status===OrderStatus.DELIVERED && role==="USER") && (
               <ReviewModal mealId={item.meal.id} />
 
             )

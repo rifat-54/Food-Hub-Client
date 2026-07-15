@@ -1,25 +1,36 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import OrderDetails from "@/components/modules/dashboardComponent/myOrders/OrderDetails";
 import { orderServices } from "@/services/order.service";
-import React from "react";
 
-export default async function OrderDetailsPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default function OrderDetailsPage() {
+  const { id } = useParams();
 
-  const response = await orderServices.getOrderById(id);
-  if (!response) {
-    return <div>Faild to load data</div>;
+  const [order, setOrder] = useState<any>(null);
+
+  const loadOrder = async () => {
+    if (!id) return;
+
+    const response = await orderServices.getOrderById(id as string);
+
+    if (response.data) {
+      setOrder(response.data);
+    }
+  };
+
+  useEffect(() => {
+    loadOrder();
+  }, [id]);
+
+  if (!order) {
+    return <div>Loading...</div>;
   }
-  const data = response.data;
-
-  // console.log(data);
 
   return (
     <section className="container py-8">
-      <OrderDetails order={data} />
+      <OrderDetails order={order} />
     </section>
   );
 }
