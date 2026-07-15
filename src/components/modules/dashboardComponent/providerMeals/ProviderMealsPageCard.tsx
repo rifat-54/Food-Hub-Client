@@ -4,7 +4,7 @@ import { Card, CardHeader } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
-export default async function ProviderMealsPageCard({ data }: { data: any }) {
+export default  function ProviderMealsPageCard({ data }: { data: any }) {
   return (
     <Card>
       <CardHeader className="space-y-6">

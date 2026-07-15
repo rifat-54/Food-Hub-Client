@@ -1,8 +1,9 @@
 import { env } from "@/env";
 import { MealType } from "@/types/meal.types";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
-const url = env.API_URL;
+// const url = env.API_URL;
+const publicUrl = env.NEXT_PUBLIC_API_URL;
 
 type MealFilter = {
   search?: string;
@@ -22,7 +23,7 @@ export const mealServices = {
       if (filter.cuisine) params.set("cuisine", filter.cuisine);
       if (filter.dietary) params.set("dietary", filter.dietary);
 
-      const res = await fetch(`${url}/menu?${params.toString()}`);
+      const res = await fetch(`${publicUrl}/menu?${params.toString()}`);
       const data = await res.json();
       return data;
     } catch (error) {
@@ -31,7 +32,7 @@ export const mealServices = {
   },
   getMealsById: async function (id: string) {
     try {
-      const res = await fetch(`${url}/menu/${id}`);
+      const res = await fetch(`${publicUrl}/menu/${id}`);
       const data = await res.json();
       return { data: data, error: null };
     } catch (error) {
@@ -40,12 +41,12 @@ export const mealServices = {
   },
   createMeal: async function (data: MealType) {
     try {
-      const cookieStore = await cookies();
-      const res = await fetch(`${url}/menu`, {
+      // const cookieStore = await cookies();
+      const res = await fetch(`${publicUrl}/menu`, {
         method: "POST",
+        credentials:"include",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
         },
         body: JSON.stringify(data),
       });

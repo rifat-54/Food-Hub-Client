@@ -1,4 +1,4 @@
-"use server";
+
 
 import { orderServices } from "@/services/order.service";
 import { OrderStatus } from "@/types/order.types";

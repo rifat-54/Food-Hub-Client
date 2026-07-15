@@ -1,14 +1,26 @@
+"use client"
 import OrderOverview from "@/components/modules/dashboardComponent/order/OrderOverview";
 import OrderTable from "@/components/modules/dashboardComponent/providerMeals/OrderTable";
 import { orderServices } from "@/services/order.service";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default async function OrdersPage() {
-  const response = await orderServices.getProviderAllOrders();
-  if (!response) {
-    return <div>Faild to load data</div>;
+export default function OrdersPage() {
+
+  const [data,setData]=useState<any>(null)
+
+  const loadData=async()=>{
+    const response = await orderServices.getProviderAllOrders();
+    setData(response.data)
   }
-  const data = response.data;
+
+  useEffect(()=>{
+    loadData()
+  },[])
+
+  if (!data) {
+    return <div>Loading ...</div>;
+  }  
+  // const data = response.data;
   // console.log(data);
   return (
     <div className="space-y-8">

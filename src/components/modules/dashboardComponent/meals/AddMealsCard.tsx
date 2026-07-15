@@ -20,9 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createMeal } from "@/actions/meal.action";
-import { date } from "zod";
+
 import { toast } from "sonner";
+import { mealServices } from "@/services/meals.service";
 
 type MealForm = {
   name: string;
@@ -73,8 +73,8 @@ export default function AddMealsCard({ categories }: CategoryProps) {
     // console.log(data);
 
     try {
-      const result = await createMeal(data);
-      // console.log(result);
+      const result = await mealServices.createMeal(data);
+      console.log(result);
       if (result.data) {
         toast.success("Successfylly Added");
         reset();

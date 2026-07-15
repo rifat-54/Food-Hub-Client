@@ -1,6 +1,5 @@
 "use client";
-import { updateOrderStatus } from "@/actions/orders.action";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -17,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { orderServices } from "@/services/order.service";
 import { OrderStatus } from "@/types/order.types";
 import Link from "next/link";
 
@@ -27,8 +27,8 @@ export default function OrderTable({ orders }: { orders: any }) {
   const handleOrderStatus = async (id: string, value: OrderStatus) => {
      
     try {
-      const result = await updateOrderStatus(id, { status: value });
-      // console.log("result ->", result);
+      const result = await orderServices.updateOrderStatus(id, { status: value });
+      console.log("result ->", result);
       if (result.data) {
         toast.success("Successfully Updated Order Status");
       }

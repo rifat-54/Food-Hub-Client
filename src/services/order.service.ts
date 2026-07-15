@@ -1,18 +1,18 @@
 import { env } from "@/env";
 import { OrderStatus } from "@/types/order.types";
 
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
-const url = env.API_URL;
+// const url = env.API_URL;
+
+const publicUrl = env.NEXT_PUBLIC_API_URL;
 
 export const orderServices = {
   getOrderById: async function (id: string) {
     try {
-      const cookieStore = await cookies();
-      const res = await fetch(`${url}/orders/${id}`, {
-        headers: {
-          Cookie: cookieStore.toString(),
-        },
+      // const cookieStore = await cookies();
+      const res = await fetch(`${publicUrl}/orders/${id}`, {
+        credentials: "include",
         cache: "no-store",
       });
       const data = await res.json();
@@ -26,14 +26,18 @@ export const orderServices = {
       return { data: null, error: { message: "Something Went Wrong!", error } };
     }
   },
-  updateOrderStatus: async function (id: string, payload:{status:OrderStatus }) {
+  updateOrderStatus: async function (
+    id: string,
+    payload: { status: OrderStatus },
+  ) {
     try {
-      const cookieStore = await cookies();
-      const res = await fetch(`${url}/orders/${id}`, {
+      // const cookieStore = await cookies();
+      const res = await fetch(`${publicUrl}/orders/${id}`, {
         method: "PATCH",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString(),
+          // Cookie: cookieStore.toString(),
         },
         body: JSON.stringify(payload),
       });
@@ -48,34 +52,28 @@ export const orderServices = {
       return { data: null, error: { message: "Something Went Wrong!", error } };
     }
   },
-  getProviderAllOrders:async function () {
-    const cookieStore=await cookies()
+  getProviderAllOrders: async function () {
+    // const cookieStore=await cookies()
     try {
-      const res=await fetch(`${url}/orders/provider`,{
-        headers:{
-          Cookie:cookieStore.toString()
-        }
-      })
-      const data=await res.json()
-      return {data,error:null}
-
+      const res = await fetch(`${publicUrl}/orders/provider`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      return { data, error: null };
     } catch (error) {
       return { data: null, error: { message: "Something Went Wrong!", error } };
     }
   },
-  getAllOrders:async function() {
+  getAllOrders: async function () {
     try {
-      const cookieStore=await cookies()
-      const res=await fetch(`${url}/orders/all`,{
-        headers:{
-          Cookie:cookieStore.toString()
-        }
-      })
-      const data=await res.json()
+      const res = await fetch(`${publicUrl}/orders/all`, {
+        credentials: "include",
+      });
+      const data = await res.json();
 
-      return {data,error:null}
+      return { data, error: null };
     } catch (error) {
-      return {data:null,error:{message:"Something went wrong",error}}
+      return { data: null, error: { message: "Something went wrong", error } };
     }
-  }
+  },
 };

@@ -1,96 +1,122 @@
 import { env } from "@/env";
-import { userService } from "./user.service";
-import { cookies } from "next/headers";
 import { ProviderProfileType } from "@/types/provider.types";
 
-const url = env.API_URL;
+const publicUrl = env.NEXT_PUBLIC_API_URL;
 
 export const providerServices = {
   getAllProvider: async function () {
     try {
-      const res = await fetch(`${url}/provider`);
+      const res = await fetch(`${publicUrl}/provider`);
+
       const data = await res.json();
 
       if (!res.ok) {
-        return { data: null, error: { message: "Something wernt wrong" } };
+        return { data: null, error: { message: data.message } };
       }
+
       return { data, error: null };
     } catch (error) {
-      return { data: null, error: { message: "Something went wrong", error } };
+      return {
+        data: null,
+        error: { message: "Something went wrong", error },
+      };
     }
   },
+
   getProviderWithMenu: async function (id: string) {
     try {
-      const res = await fetch(`${url}/provider/${id}`);
+      const res = await fetch(`${publicUrl}/provider/${id}`);
 
       const data = await res.json();
 
       if (!res.ok) {
-        return { data: null, error: { message: "Something wernt wrong" } };
+        return { data: null, error: { message: data.message } };
       }
+
       return { data, error: null };
     } catch (error) {
-      return { data: null, error: { message: "Something went wrong", error } };
+      return {
+        data: null,
+        error: { message: "Something went wrong", error },
+      };
     }
   },
+
   getProviderMeals: async function () {
     try {
-      const cookieStore = await cookies();
-      const { data } = await userService.getSession();
-      console.log(data.user.id);
-
-      const res = await fetch(`${url}/provider/allmeals`, {
-        headers: {
-          Cookie: cookieStore.toString(),
-        },
-        next: {
-          tags: ["provider-meals"],
-        },
+      const res = await fetch(`${publicUrl}/provider/allmeals`, {
+        credentials: "include",
       });
+
       const meals = await res.json();
 
-      // if(!res.ok){
-      //   return {data:null,error:{message:"Something went wrong"}}
-      // }
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: meals.message || "Something went wrong" },
+        };
+      }
 
       return { data: meals, error: null };
     } catch (error) {
-      return { data: null, error: { message: "Something went wrong", error } };
+      return {
+        data: null,
+        error: { message: "Something went wrong", error },
+      };
     }
   },
+
   deleteMeals: async function (id: string) {
     try {
-      const cookieStore = await cookies();
-      const res = await fetch(`${url}/menu/${id}`, {
+      const res = await fetch(`${publicUrl}/menu/${id}`, {
         method: "DELETE",
-        headers: {
-          Cookie: cookieStore.toString(),
-        },
+        credentials: "include",
       });
+
       const data = await res.json();
+
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: data.message || "Something went wrong" },
+        };
+      }
 
       return { data, error: null };
     } catch (error) {
-      return { data: null, error: { message: "Something went wrong", error } };
+      return {
+        data: null,
+        error: { message: "Something went wrong", error },
+      };
     }
   },
+
   createProviderProfile: async function (data: ProviderProfileType) {
     try {
-      const cookieStore = await cookies();
-
-      const res = await fetch(`${url}/provider`, {
+      const res = await fetch(`${publicUrl}/provider`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Cookie: cookieStore.toString()
         },
         body: JSON.stringify(data),
       });
+
       const result = await res.json();
 
-      return { data:result, error: null };
+      if (!res.ok) {
+        return {
+          data: null,
+          error: { message: result.message || "Something went wrong" },
+        };
+      }
+
+      return { data: result, error: null };
     } catch (error) {
-      return { data: null, error: { message: "Something went wrong", error } };
+      return {
+        data: null,
+        error: { message: "Something went wrong", error },
+      };
     }
   },
 };

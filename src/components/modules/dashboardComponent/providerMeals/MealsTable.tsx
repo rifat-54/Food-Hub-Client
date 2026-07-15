@@ -1,5 +1,4 @@
 "use client";
-import { deleteMeals } from "@/actions/provider.action";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,25 +10,25 @@ import {
   TableHeader, 
   TableRow,
 } from "@/components/ui/table";
+import { providerServices } from "@/services/provider.service";
 
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+
 import { toast } from "sonner";
 
 
-export default function MealsTable({ meals }: { meals: any }) {
+export default function MealsTable({ meals,reload }: { meals: any,reload:()=>Promise<void> }) {
 
 
-    const router=useRouter()
   
     const handleDeletemeal = async (id: string) => {
-      const result = await deleteMeals(id);
+      const result = await providerServices.deleteMeals(id);
         if(result.data.id){
 
             toast.success("Successfully Delated")
-            router.refresh()
+            await reload()
         }else{
             toast.error(result.data.message)
         }

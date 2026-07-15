@@ -1,16 +1,33 @@
+"use client"
 import AddMealsCard from "@/components/modules/dashboardComponent/meals/AddMealsCard";
 import { categoryServices } from "@/services/category.service";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export default async function AddMealPage() {
+export default function AddMealPage() {
+
+
+const [category,setCategory]=useState<any>(null)
+
+const loadCategory=async()=>{
   const response = await categoryServices.getAllCategory();
-  if (!response) {
-    return <div>Faild to load data</div>;
+  setCategory(response.data)
+
+}
+
+useEffect(()=>{
+  loadCategory()
+},[])
+
+  if (!category) {
+    return <div>Loading...</div>;
   }
-  const data = response.data;
+
+  // console.log("from category",response)
+
+  // const data = response.data;
   return (
     <div>
-      <AddMealsCard categories={data} />
+      <AddMealsCard categories={category} />
     </div>
   );
 }
