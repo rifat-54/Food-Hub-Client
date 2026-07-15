@@ -1,4 +1,4 @@
-
+"use client"
 import { AppSidebar } from "@/components/app-sidebar";
 import DashboardContent from "@/components/modules/dashboardComponent/DashboardContent";
 
@@ -13,7 +13,7 @@ import { authClient } from "@/lib/auth-client";
 import { userService } from "@/services/user.service";
 import { redirect } from "next/navigation";
 
-export default async  function DashboardLayout({
+export default   function DashboardLayout({
   children,
   user,
   admin,
@@ -24,18 +24,33 @@ export default async  function DashboardLayout({
   admin: React.ReactNode;
   provider: React.ReactNode;
 }) {
-  const { data } = await userService.getSession();
 
+  const  {data,isPending} = authClient.useSession();
+
+
+  if (isPending) {
+  return <div>Loading...</div>;
+}
+
+
+  console.log("from dashboardd",data)
+
+
+
+
+  // const { data } = await userService.getSession();
 
   if(!data){
     return redirect("/login")
   }
 
-  const role = data?.data?.user?.role;
+  const role = (data.user as any).role;
+
+  console.log("role",role)
 
   return (
     <SidebarProvider>
-      <AppSidebar user={data?.user} />
+      <AppSidebar user={data?.user as any} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
