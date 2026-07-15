@@ -1,6 +1,5 @@
 "use client";
 
-import { createProviderProfile } from "@/actions/provider.action";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { providerServices } from "@/services/provider.service";
 
 import { useForm } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
@@ -45,7 +45,8 @@ export default function UpdateProviderProfileForm() {
       const toastId = toast.loading("Creating provider profile...");
 
       try {
-        const { data } = await createProviderProfile(value);
+        // const { data } = await createProviderProfile(value);
+        const { data } = await providerServices.createProviderProfile(value);
 
         // console.log(data);
 

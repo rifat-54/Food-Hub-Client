@@ -26,9 +26,10 @@ import { toast } from "sonner";
 import * as z from "zod";
 import RoleSelector from "./RoleSelector";
 import ProviderFields from "./ProviderFields";
-import { createProviderProfile } from "@/actions/provider.action";
+// import { createProviderProfile } from "@/actions/provider.action";
 import { useEffect, useState } from "react";
 import { Role } from "@/constant/role";
+import { providerServices } from "@/services/provider.service";
 
 const formSchema = z
   .object({
@@ -117,7 +118,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         }
 
         if (value.role === UserRole.PROVIDER) {
-          const pdata = await createProviderProfile(providerData);
+          const pdata = await providerServices.createProviderProfile(providerData);
           // console.log(pdata);
         }
 

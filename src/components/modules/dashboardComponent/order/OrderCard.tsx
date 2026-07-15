@@ -9,7 +9,7 @@ import { orderServices } from "@/services/order.service";
 import { useEffect } from "react";
 import { env } from "@/env";
 import { useRouter } from "next/navigation";
-import { updateOrderStatus } from "@/actions/orders.action";
+// import { updateOrderStatus } from "@/actions/orders.action";
 import { OrderStatus } from "@/types/order.types";
 import { toast } from "sonner";
 
@@ -20,7 +20,7 @@ interface OrderCardProps {
 export default function OrderCard({ order }: OrderCardProps) {
   const handleUpdateStatus = async () => {
     try {
-      const { data } = await updateOrderStatus(order.id, {
+      const { data } = await orderServices.updateOrderStatus(order.id, {
         status: OrderStatus.CANCELLED,
       });
       toast.success("Order cancelled");
