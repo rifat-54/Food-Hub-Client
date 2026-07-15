@@ -100,7 +100,7 @@ export function UsersTable({ users,reload }: UsersTableProps) {
                     <Select
                       value={user.status}
                       onValueChange={(value: UserStatus) => {
-                        console.log(user.id, value);
+                        // console.log(user.id, value);
                         handleUpdateStatus(user.id, value);
                       }}
                     >

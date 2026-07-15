@@ -13,7 +13,7 @@ export default function Demo() {
 
   const [user, setUser] = useState(null);
 
-  console.log("from demo",session)
+  // console.log("from demo",session)
 
   useEffect(() => {
     if (!isPending && !session) {

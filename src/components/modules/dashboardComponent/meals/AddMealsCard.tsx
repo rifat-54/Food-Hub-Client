@@ -74,7 +74,7 @@ export default function AddMealsCard({ categories }: CategoryProps) {
 
     try {
       const result = await mealServices.createMeal(data);
-      console.log(result);
+      // console.log(result);
       if (result.data) {
         toast.success("Successfylly Added");
         reset();

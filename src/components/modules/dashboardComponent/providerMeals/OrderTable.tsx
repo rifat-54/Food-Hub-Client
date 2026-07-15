@@ -28,7 +28,7 @@ export default function OrderTable({ orders,reload }: { orders: any,reload:()=>P
      
     try {
       const result = await orderServices.updateOrderStatus(id, { status: value });
-      console.log("result ->", result);
+      // console.log("result ->", result);
       if (result.data) {
         toast.success("Successfully Updated Order Status");
       }

@@ -22,7 +22,7 @@ export default function AlloOrders() {
     return <div>Loading...</div>
   }
 
-    console.log(data)
+    // console.log(data)
   return (
     <div>
         <OrdersHero orders={data}/>

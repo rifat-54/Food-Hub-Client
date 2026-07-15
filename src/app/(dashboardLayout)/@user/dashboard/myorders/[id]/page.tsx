@@ -8,7 +8,7 @@ export default function OrderDetailsPage() {
 
     const {id}=useParams();
 
-    console.log("id",id)
+    // console.log("id",id)
 
     const [data,setData]=useState<any>(null)
 

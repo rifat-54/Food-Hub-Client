@@ -93,7 +93,7 @@ const Navbar1 = ({
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const { data } = authClient.useSession();
-  console.log(data);
+  // console.log(data);
 
 
   const handleLogout=async()=>{

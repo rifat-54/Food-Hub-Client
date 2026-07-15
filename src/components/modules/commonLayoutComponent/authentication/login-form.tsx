@@ -58,7 +58,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
 
 
 
-        console.log(data)
+     
 
         if (error) {
           toast.error(error?.message, { id: toastId });
