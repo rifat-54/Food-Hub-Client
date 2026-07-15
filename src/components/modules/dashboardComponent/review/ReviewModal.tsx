@@ -1,5 +1,4 @@
 "use client";
-import { createReview } from "@/actions/review.action";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,6 +14,7 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { reviewServices } from "@/services/review.services";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -48,7 +48,7 @@ const [open,setOpen]=useState(false)
     }
 
     try {
-        const result=await createReview(data)
+        const result=await reviewServices.createReview(data)
 
         if(result.data){
             toast.success("Successfully add review")

@@ -1,4 +1,4 @@
-import { createCategory } from "@/actions/category.action";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,12 +13,13 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { categoryServices } from "@/services/category.service";
 import { useForm } from "@tanstack/react-form";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export function AddCategoryModal() {
+export function AddCategoryModal({reload}:{reload:()=>Promise<void>}) {
 
     const[open,setOpen]=useState(false)
 
@@ -28,11 +29,12 @@ export function AddCategoryModal() {
     },
     onSubmit: async ({ value }) => {
       try {
-        const { data } = await createCategory(value.name);
+        const { data } = await categoryServices.createCategory(value.name);
         // console.log(data);
         if(data){
             toast.success("Successfully Added!")
         }
+        reload()
         form.reset()
         setOpen(false)
       } catch (error) {

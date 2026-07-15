@@ -1,6 +1,5 @@
 "use client";
 
-
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -20,8 +19,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { UserStatus } from "@/types/user.types";
-import { updateUserStatus } from "@/actions/user.action";
+
 import { toast } from "sonner";
+import { userService } from "@/services/user.service";
 
 type User = {
   id: string;
@@ -36,17 +36,19 @@ type User = {
 
 interface UsersTableProps {
   users: User[];
+  reload:()=>Promise<void>
 }
 
-export function UsersTable({ users }: UsersTableProps) {
+export function UsersTable({ users,reload }: UsersTableProps) {
   const handleUpdateStatus = async (id: string, status: UserStatus) => {
     // console.log(status);
     try {
-      const { data } = await updateUserStatus(id, status);
+      const { data } = await userService.updateUserStatus(id, status);
     //   console.log(data);
       if (data?.data) {
         toast.success("Successfully Updated Status");
       }
+      reload()
     } catch (error) {
         toast.error(error instanceof Error?error.message:"Something Went wrong")
     }

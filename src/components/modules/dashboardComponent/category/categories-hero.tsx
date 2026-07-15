@@ -15,10 +15,12 @@ type Category = {
 
 interface CategoriesHeroProps {
   categories: Category[];
+  reload:()=>Promise<void>
 }
 
 export function CategoriesHero({
   categories,
+  reload
 }: CategoriesHeroProps) {
   const totalCategories = categories.length;
 
@@ -44,7 +46,7 @@ export function CategoriesHero({
           </p>
         </div>
 
-        <AddCategoryModal/>
+        <AddCategoryModal reload={reload}/>
     
       </div>
 

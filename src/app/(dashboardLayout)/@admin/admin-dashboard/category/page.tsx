@@ -1,17 +1,36 @@
-import { CategoriesHero } from '@/components/modules/dashboardComponent/category/categories-hero'
-import { CategoriesTable } from '@/components/modules/dashboardComponent/category/categories-table'
-import { categoryServices } from '@/services/category.service'
-import React from 'react'
+"use client";
 
-export default  async function CategoryPage() {
-    const {data}=await categoryServices.getAllCategory()
+import { useEffect, useState } from "react";
+import { CategoriesHero } from "@/components/modules/dashboardComponent/category/categories-hero";
+import { CategoriesTable } from "@/components/modules/dashboardComponent/category/categories-table";
+import { categoryServices } from "@/services/category.service";
 
-    // console.log(data)
+export default function CategoryPage() {
+  const [categories, setCategories] = useState<any>(null);
+
+  const loadCategories = async () => {
+    const response = await categoryServices.getAllCategory();
+
+    if (response.data) {
+      setCategories(response.data);
+    }
+  };
+
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  if (!categories) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
-        <CategoriesHero categories={data}/>
-        <CategoriesTable categories={data} />
+      <CategoriesHero categories={categories} reload={loadCategories} />
+      <CategoriesTable
+        categories={categories}
+        reload={loadCategories}
+      />
     </div>
-  )
+  );
 }

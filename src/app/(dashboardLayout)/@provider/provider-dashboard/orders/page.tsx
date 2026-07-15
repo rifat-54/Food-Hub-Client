@@ -20,12 +20,12 @@ export default function OrdersPage() {
   if (!data) {
     return <div>Loading ...</div>;
   }  
-  // const data = response.data;
-  // console.log(data);
+
+  
   return (
     <div className="space-y-8">
       <OrderOverview data={data} />
-      <OrderTable orders={data} />
+      <OrderTable orders={data} reload={loadData} />
     </div>
   );
 }

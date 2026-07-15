@@ -1,15 +1,28 @@
-import { UsersTable } from '@/components/modules/dashboardComponent/users/UsersTable'
-import { userService } from '@/services/user.service'
-import React from 'react'
+"use client";
 
-export default async function UserPage() {
-    const response=await userService.getAllUsers()
+import { useEffect, useState } from "react";
+import { UsersTable } from "@/components/modules/dashboardComponent/users/UsersTable";
+import { userService } from "@/services/user.service";
 
-    if(!response){
-      return <div>Faild to load users</div>
+export default function UserPage() {
+  const [users, setUsers] = useState<any>(null);
+
+  const loadUsers = async () => {
+    const response = await userService.getAllUsers();
+
+    if (response.data) {
+      setUsers(response.data.data);
     }
+  };
 
-    // console.log("data ->",response)
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  if (!users) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -19,7 +32,7 @@ export default async function UserPage() {
         </p>
       </div>
 
-      <UsersTable users={response?.data?.data} />
+      <UsersTable users={users} reload={loadUsers} />
     </div>
-  )
+  );
 }

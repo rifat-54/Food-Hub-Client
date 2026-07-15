@@ -18,8 +18,9 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { deleteCategory } from "@/actions/category.action";
+
 import { toast } from "sonner";
+import { categoryServices } from "@/services/category.service";
 
 type Category = {
   id: string;
@@ -30,21 +31,23 @@ type Category = {
 
 interface CategoriesTableProps {
   categories: Category[];
+  reload:()=>Promise<void>
 }
 
 export function CategoriesTable({
   categories,
+  reload
 }: CategoriesTableProps) {
 
 
     const handleDeleteCategory=async(id:string)=>{
         try {
-        const { data } = await deleteCategory(id);
+        const { data } = await categoryServices.deleteCategory(id);
         // console.log(data);
         if(data){
             toast.success("Successfully deleted!")
         }
-       
+       reload()
        
       } catch (error) {
         toast.error(error instanceof Error?error.message:"Something went wrong")

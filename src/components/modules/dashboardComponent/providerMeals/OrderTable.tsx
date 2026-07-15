@@ -22,7 +22,7 @@ import Link from "next/link";
 
 import { toast } from "sonner";
 
-export default function OrderTable({ orders }: { orders: any }) {
+export default function OrderTable({ orders,reload }: { orders: any,reload:()=>Promise<void> }) {
     
   const handleOrderStatus = async (id: string, value: OrderStatus) => {
      
@@ -32,6 +32,7 @@ export default function OrderTable({ orders }: { orders: any }) {
       if (result.data) {
         toast.success("Successfully Updated Order Status");
       }
+      reload()
     } catch (error) {
         toast.error(error instanceof Error?error.message:"Something Went Wrong!")
     }
